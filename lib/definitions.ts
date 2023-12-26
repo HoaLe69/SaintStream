@@ -1,0 +1,15 @@
+export type Movie = {
+  adult: boolean
+  backdrop_path: string
+  id: number
+  title: string
+  original_title: string
+  overview: string
+  poster?: string
+  media_type: string
+  genre_ids: Array<number>
+  popularity: number
+  release_date: string
+  vote_average: number
+  vote_count: number
+}
