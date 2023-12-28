@@ -5,9 +5,16 @@ import Link from 'next/link'
 
 export default function Header() {
   return (
-    <header className="container flex items-center  justify-between fixed top-0 right-0 left-0 z-50  h-[110px] mx-auto">
+    <header className="container px-2 flex  items-center  justify-between fixed top-0 right-0 left-0 z-50  h-[110px] mx-auto">
       <Link href="/">
-        <Image src="/images/svg.svg" alt="logo" width={150} height={100} />
+        <Image
+          src="/images/logo.svg"
+          priority
+          alt="logo"
+          width={150}
+          height={100}
+          style={{ width: '100%', height: 'auto' }}
+        />
       </Link>
       <nav className="hidden md:flex items-center gap-10">
         <p>Home</p>

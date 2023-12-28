@@ -45,18 +45,13 @@ body {
   transform: translateX(-100%);
 }
 .swiper-button-prev {
-  background: rgba(0, 0, 0, 0.7);
+  background: red;
   border-radius: 100%;
-  width: 40px !important;
-  height: 40px !important;
-}
-.swiper-button-next {
-  background: rgba(0, 0, 0, 0.7);
-  border-radius: 100%;
-  width: 40px !important;
-  height: 40px !important;
+  width: 40px;
+  height: 40px;
 }
 .swiper-button-prev:after {
+  background-color: red !important;
   font-size: 20px !important;
   color: white !important;
 }

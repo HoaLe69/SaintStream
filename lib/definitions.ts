@@ -5,7 +5,7 @@ export type Movie = {
   title: string
   original_title: string
   overview: string
-  poster?: string
+  poster_path: string
   media_type: string
   genre_ids: Array<number>
   popularity: number

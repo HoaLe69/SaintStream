@@ -4,18 +4,9 @@ import { PlayCircleIcon } from '@heroicons/react/24/solid'
 import { BookmarkIcon } from '@heroicons/react/24/outline'
 import { Movie } from '@/lib/definitions'
 import { useEffect, useState } from 'react'
-import { fetchTrendingMovies } from '@/lib/data'
 
-export default function Heros() {
-  const [movies, setMovies] = useState<Movie[]>([])
+export default function Heros({ movies }: { movies: Movie[] }) {
   const [index, setIndex] = useState<number>(0)
-  useEffect(() => {
-    async function heros() {
-      const heros = await fetchTrendingMovies()
-      setMovies(heros)
-    }
-    heros()
-  }, [])
   useEffect(() => {
     if (movies?.length) {
       const lastIndex = movies.length - 1
@@ -29,25 +20,26 @@ export default function Heros() {
     return () => clearTimeout(timerId)
   }, [index, movies?.length])
   return (
-    <div className="w-screen h-[648px] flex overflow-hidden relative">
+    <div className="min-w-screen h-[648px] flex overflow-hidden relative">
       {movies?.map((movie: Movie, heroIndex: number) => {
-        let position = 'next'
-        if (heroIndex === index) position = 'active'
-        if (
-          heroIndex === index - 1 ||
-          (index === 0 && heroIndex === movies.length - 1)
-        )
-          position = 'last'
+        //        let position = 'next'
+        //       if (heroIndex === index) position = 'active'
+        //      if (
+        //       heroIndex === index - 1 ||
+        //      (index === 0 && heroIndex === movies.length - 1)
+        //   )
+        //    position = 'last'
+        if (heroIndex > 0) return
         return (
           <div
             key={movie.id}
             style={{
               backgroundImage: `url('https://image.tmdb.org/t/p/original${movie?.backdrop_path}')`
             }}
-            className={`slide ${position} w-screen bg-no-repeat bg-cover h-[300px] md:h-[648px]`}
+            className={` w-screen bg-no-repeat bg-cover overflow-hidden h-[300px] md:h-[648px]`}
           >
             <div className="absolute inset-0 bg-hero-pattern">
-              <div className="container h-full flex items-end">
+              <div className="container px-2 mx-auto h-full flex items-end">
                 <div className="py-11 flex flex-col gap-y-5">
                   <h1 className="text-4xl font-bold">
                     {movie?.original_title}
