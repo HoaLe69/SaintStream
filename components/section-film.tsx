@@ -35,14 +35,14 @@ export default function SectionFilm({
                   <div className="relative w-[250px] overflow-hidden rounded-xl">
                     <Image
                       src={`https://image.tmdb.org/t/p/original${movie?.poster_path}`}
-                      alt={movie?.original_title}
+                      alt={movie?.overview}
                       width={250}
                       height={400}
                       className="rounded-xl w-auto"
                     />
                     <div className="absolute p-3 inset-0 w-full bg-dark-to-light flex flex-col justify-end">
                       <p className="text-[16px] font-bold truncate w-[70%]">
-                        {movie?.original_title}
+                        {movie?.original_title || movie?.original_name}
                       </p>
                       <div className="flex items-center gap-2">
                         <span className="flex items-center">
@@ -52,7 +52,10 @@ export default function SectionFilm({
                           </span>
                         </span>
                         <p className="text-xs leading-3 text-gray-400 pl-2 border-l-2 border-gray-400">
-                          {movie?.release_date.split('-')[0]}
+                          {movie?.release_date &&
+                            movie.release_date.split('-')[0]}
+                          {movie?.first_air_date &&
+                            movie.first_air_date.split('-')[0]}
                         </p>
                       </div>
                     </div>

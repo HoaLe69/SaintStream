@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { quicksand } from '@/components/fonts'
 import Header from '@/components/header'
+import Footer from '@/components/footer'
 
 export const metadata: Metadata = {
   title: 'Movies',
@@ -18,6 +19,7 @@ export default function RootLayout({
       <body className={`${quicksand.className}   antialiased  `}>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   )

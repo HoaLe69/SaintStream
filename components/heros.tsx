@@ -42,10 +42,11 @@ export default function Heros({ movies }: { movies: Movie[] }) {
               <div className="container px-2 mx-auto h-full flex items-end">
                 <div className="py-11 flex flex-col gap-y-5">
                   <h1 className="text-4xl font-bold">
-                    {movie?.original_title}
+                    {movie?.original_title || movie?.original_name}
                   </h1>
                   <p className="text-sm text-gray-400 font-normal">
-                    Release date &#x2022; {movie?.release_date}
+                    Release date &#x2022;{' '}
+                    {movie?.release_date || movie?.first_air_date}
                   </p>
                   <p className="text-sm w-[50%]">{movie?.overview}</p>
                   <div className="flex items-center gap-4">

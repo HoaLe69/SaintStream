@@ -1,9 +1,13 @@
+'use client'
 import Image from 'next/image'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
 import { Button } from './button'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import clsx from 'clsx'
 
 export default function Header() {
+  const pathname = usePathname()
   return (
     <header className="container px-2 flex  items-center  justify-between fixed top-0 right-0 left-0 z-50  h-[110px] mx-auto">
       <Link href="/">
@@ -17,11 +21,30 @@ export default function Header() {
         />
       </Link>
       <nav className="hidden md:flex items-center gap-10">
-        <p>Home</p>
-        <Link href="/discover">Discover</Link>
-        <p>Movie Release</p>
-        <p>Forum</p>
-        <p>About</p>
+        <Link
+          href="/"
+          className={clsx('transition-all', {
+            'font-black text-xl': pathname === '/'
+          })}
+        >
+          Home
+        </Link>
+        <Link
+          href="/tv"
+          className={clsx('transition-all', {
+            'font-black text-xl': pathname === '/tv'
+          })}
+        >
+          TV Shows
+        </Link>
+        <Link
+          href="/explore"
+          className={clsx('transition-all', {
+            'font-black text-xl': pathname === '/explore'
+          })}
+        >
+          Explore
+        </Link>
       </nav>
       <div className="flex items-center gap-3">
         <MagnifyingGlassIcon className="w-6 h-6" />
