@@ -1,6 +1,7 @@
 import Heros from '@/components/heros'
 import SectionFilm from '@/components/section-film'
 import Separate from '@/components/separate'
+import Footer from '@/components/footer'
 import {
   fetchPopularMovie,
   fetchTopRateMovie,
@@ -18,6 +19,7 @@ export default async function Home() {
       <SectionFilm title="Popular" movies={popular} />
       <Separate distance="40" />
       <SectionFilm title="Top rate" movies={topRate} />
+      <Footer />
     </main>
   )
 }
