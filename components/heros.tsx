@@ -20,7 +20,7 @@ export default function Heros({ movies }: { movies: Movie[] }) {
     return () => clearTimeout(timerId)
   }, [index, movies?.length])
   return (
-    <div className="min-w-screen h-[648px] flex overflow-hidden relative">
+    <div className="h-[648px] flex overflow-hidden relative">
       {movies?.map((movie: Movie, heroIndex: number) => {
         //        let position = 'next'
         //       if (heroIndex === index) position = 'active'

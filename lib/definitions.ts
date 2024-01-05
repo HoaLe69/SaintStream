@@ -15,3 +15,28 @@ export type Movie = {
   vote_average: number
   vote_count: number
 }
+export type Genres = {
+  id: number
+  name: string
+}
+export type ProductionCompany = {
+  id: number
+  logo_path: string
+  name: string
+  origin_country: string
+}
+export type ProductionCountry = {
+  iso_3166_1: string
+  name: string
+}
+export type MovieDetail = Movie & {
+  budget: number
+  genres: Genres[]
+  homepage: string
+  production_companies: ProductionCompany[]
+  production_countries: ProductionCountry[]
+  revenue: number
+  runtime: number
+  status: string
+  tagline?: string
+}

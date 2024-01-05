@@ -10,19 +10,21 @@ import { useRef } from 'react'
 export default function Header() {
   const ref = useRef<HTMLHeadElement>(null)
   const pathname = usePathname()
-  window.addEventListener('scroll', () => {
-    const header = ref?.current
-    const scrollY = window.scrollY
-    if (header) {
-      if (scrollY > 0) {
-        header.style.backgroundColor = 'rgba(0 , 0 ,0 ,0.7)'
-        header.style.backdropFilter = 'blur(5px)'
-      } else {
-        header.style.backgroundColor = 'transparent'
-        header.style.backdropFilter = 'blur(0)'
+  if (typeof window !== 'undefined') {
+    window.addEventListener('scroll', () => {
+      const header = ref?.current
+      const scrollY = window.scrollY
+      if (header) {
+        if (scrollY > 0) {
+          header.style.backgroundColor = 'rgba(0 , 0 ,0 ,0.7)'
+          header.style.backdropFilter = 'blur(5px)'
+        } else {
+          header.style.backgroundColor = 'transparent'
+          header.style.backdropFilter = 'blur(0)'
+        }
       }
-    }
-  })
+    })
+  }
   return (
     <header
       ref={ref}

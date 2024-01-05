@@ -1,7 +1,6 @@
 import Heros from '@/components/heros'
 import SectionFilm from '@/components/section-film'
 import Separate from '@/components/separate'
-import Footer from '@/components/footer'
 import { fetchMovies } from '@/lib/data'
 import { TRENDING, TOP_RATE, POPULAR, UP_COMING } from '@/lib/endpoint'
 
