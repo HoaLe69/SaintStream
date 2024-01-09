@@ -6,9 +6,11 @@ import { Navigation, Pagination } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
+
 type Props = {
   casts: Cast[]
 }
+
 export default function TopCast({ casts }: Props) {
   const fallbackAvt = '/images/no-avatar.png'
   return (

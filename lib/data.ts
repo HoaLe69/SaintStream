@@ -12,8 +12,9 @@ const config = {
 export async function fetchMovies(address: string) {
   try {
     const res = await fetch(`${baseUrl}${address}`, config)
-    const heros = await res.json()
-    return heros.results
+    const movies = await res.json()
+    console.log(movies)
+    return movies.results
   } catch (e) {
     console.error(e)
     throw new Error('Failed to fetch trending movie')

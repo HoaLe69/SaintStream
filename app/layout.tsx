@@ -15,7 +15,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${quicksand.className}   antialiased  `}>
+      <body
+        className={`w-screen overflow-x-hidden ${quicksand.className}   antialiased  `}
+      >
         <Header />
         {children}
         <Footer />
