@@ -4,10 +4,10 @@ import Image from 'next/image'
 import { StarIcon } from '@heroicons/react/24/solid'
 import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import Link from 'next/link'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
-import Link from 'next/link'
 
 export default function SectionFilm({
   movies,

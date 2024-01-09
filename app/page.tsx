@@ -1,10 +1,11 @@
-import Heros from '@/components/heros'
-import SectionFilm from '@/components/section-film'
-import Separate from '@/components/separate'
-import { fetchMovies } from '@/lib/data'
-import { TRENDING, TOP_RATE, POPULAR, UP_COMING } from '@/lib/endpoint'
+import Heros from "@/components/heros"
+import SectionFilm from "@/components/section-film"
+import Separate from "@/components/separate"
+import { fetchMovies } from "@/lib/data"
+import { TRENDING, TOP_RATE, POPULAR, UP_COMING } from "@/lib/endpoint"
 
 export default async function Home() {
+  const huge = "hel;o anhe"
   const heros = await fetchMovies(TRENDING)
   const popular = await fetchMovies(POPULAR)
   const topRate = await fetchMovies(TOP_RATE)

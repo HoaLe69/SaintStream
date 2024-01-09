@@ -1,4 +1,4 @@
-import clsx from 'clsx'
+import clsx from "clsx"
 
 export function Button({
   children,
@@ -12,11 +12,11 @@ export function Button({
   return (
     <button
       className={clsx(
-        'px-6 py-3  rounded-xl font-bold text-sm',
+        "px-6 py-3  rounded-xl font-bold text-sm",
         {
-          'bg-green-500': primary
+          "bg-green-500": primary
         },
-        { 'border-white border-2': outline }
+        { "border-white border-2": outline }
       )}
     >
       {children}
