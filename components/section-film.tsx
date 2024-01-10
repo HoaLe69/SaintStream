@@ -16,6 +16,7 @@ export default function SectionFilm({
   movies: Movie[]
   title: string
 }) {
+  if (!movies.length) return
   return (
     <div className="container px-2 mx-auto overflow-hidden">
       <h2 className="text-2xl mb-6 font-bold">{title}</h2>
