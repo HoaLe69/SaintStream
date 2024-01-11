@@ -58,3 +58,7 @@ body {
   font-size: 12px !important;
   color: white !important;
 }
+
+.swiper-button-disabled {
+  display: none !important;
+}

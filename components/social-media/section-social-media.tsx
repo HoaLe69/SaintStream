@@ -22,7 +22,7 @@ export default function SectionSocial({ movieId }: { movieId: string }) {
           ></TabItems>
         ))}
       </div>
-      <div>
+      <div className="mt-2">
         <TabPannel id={0} index={tabIndex}>
           <MediaVideos movieId={movieId} />
         </TabPannel>

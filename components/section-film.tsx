@@ -27,13 +27,12 @@ export default function SectionFilm({
           slidesPerView="auto"
           slidesPerGroupAuto
           spaceBetween={30}
-          loop
         >
           {movies &&
             movies.map((movie: Movie) => {
               if (!movie.poster_path) return
               return (
-                <SwiperSlide key={movie?.id} className="!w-max !mr-4">
+                <SwiperSlide key={movie?.id} className="!w-max ">
                   <Link href={`/movie/${movie?.id}`}>
                     <div key={movie?.id} className="transition-all">
                       <div className="relative w-[250px] h-[400px] overflow-hidden rounded-xl">

@@ -22,7 +22,6 @@ export default function TopCast({ casts }: Props) {
         slidesPerView="auto"
         slidesPerGroupAuto
         spaceBetween={30}
-        loop
       >
         {casts &&
           casts.map(cast => (
