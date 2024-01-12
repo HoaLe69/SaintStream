@@ -9,6 +9,8 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
+import { usePathname } from 'next/navigation'
+import VideoPlayer from './videos'
 
 // async function getVideoKeys(movieId: string) {
 //   const videos = await fetchMovies(VIDEOS_KEY(movieId))
@@ -16,16 +18,23 @@ import 'swiper/css/navigation'
 // }
 
 export default function MediaVideos({ movieId }: { movieId: string }) {
+  const pathname = usePathname()
   const [videos, setVideos] = useState<Video[]>([])
+  const [showVideo, setShowVideo] = useState({ videoKey: '', name: '' })
   // let you read the value of a resource like a promise or context
   // const videoKeys: Video[] = use(getVideoKeys(movieId))
   useEffect(() => {
     async function getVideoKeys() {
       const res = await fetchMovies(VIDEOS_KEY(movieId))
+      console.log(res)
       setVideos(res)
     }
     getVideoKeys()
   }, [movieId])
+  const createUrl = (key: string, name: string) => {
+    window.history.replaceState(null, name, `${pathname}?play=${key}`)
+    setShowVideo({ videoKey: key, name: name })
+  }
   if (!videos?.length) return 'No video'
   return (
     <div>
@@ -45,7 +54,10 @@ export default function MediaVideos({ movieId }: { movieId: string }) {
                 }}
               >
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="inline-block p-3 bg-[rgba(0,0,0,.6)] rounded-full cursor-pointer group ">
+                  <span
+                    onClick={() => createUrl(video?.key, video?.name)}
+                    className="inline-block p-3 bg-[rgba(0,0,0,.6)] rounded-full cursor-pointer group "
+                  >
                     <PlayIcon className="w-8 h-8 group-hover:text-gray-400" />
                   </span>
                 </div>
@@ -53,6 +65,9 @@ export default function MediaVideos({ movieId }: { movieId: string }) {
             </SwiperSlide>
           ))}
       </Swiper>
+      {showVideo.videoKey && (
+        <VideoPlayer {...showVideo} setShow={setShowVideo} />
+      )}
     </div>
   )
 }

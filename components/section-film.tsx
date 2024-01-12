@@ -16,7 +16,7 @@ export default function SectionFilm({
   movies: Movie[]
   title: string
 }) {
-  if (!movies.length) return
+  if (!movies?.length) return
   return (
     <div className="container px-2 mx-auto overflow-hidden">
       <h2 className="text-2xl mb-6 font-bold">{title}</h2>
@@ -35,12 +35,12 @@ export default function SectionFilm({
                 <SwiperSlide key={movie?.id} className="!w-max ">
                   <Link href={`/movie/${movie?.id}`}>
                     <div key={movie?.id} className="transition-all">
-                      <div className="relative w-[250px] h-[400px] overflow-hidden rounded-xl">
+                      <div className="relative w-[200px] h-[300px] overflow-hidden rounded-xl">
                         <Image
                           src={`https://image.tmdb.org/t/p/original${movie?.poster_path}`}
                           alt={movie.title}
-                          width={250}
-                          height={400}
+                          width={200}
+                          height={300}
                           className="rounded-xl w-full h-full object-cover"
                         />
                         <div className="absolute p-3 inset-0 w-full bg-dark-to-light flex flex-col justify-end">

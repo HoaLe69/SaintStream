@@ -1,22 +1,27 @@
-import clsx from "clsx"
+import clsx from 'clsx'
 
 export function Button({
   children,
   outline,
-  primary
+  primary,
+  classes,
+  handleClick
 }: {
   children: React.ReactNode
   outline?: boolean
   primary?: boolean
+  classes?: string
+  handleClick?: () => void
 }) {
   return (
     <button
+      onClick={handleClick}
       className={clsx(
-        "px-6 py-3  rounded-xl font-bold text-sm",
+        `px-5 py-3  rounded-xl font-bold text-sm hover:scale-95 transition-all ${classes}`,
         {
-          "bg-green-500": primary
+          'bg-green-500': primary
         },
-        { "border-white border-2": outline }
+        { 'border-white border-2': outline }
       )}
     >
       {children}

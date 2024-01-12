@@ -20,8 +20,8 @@ export default async function Banner({ movieId }: { movieId: string }) {
             <div className="py-11 flex  gap-x-10 items-start">
               <Image
                 src={`https://image.tmdb.org/t/p/original${banner?.poster_path}`}
-                width={300}
-                height={450}
+                width={250}
+                height={400}
                 className="rounded-md"
                 alt={banner?.original_title || 'banner about film'}
               />
@@ -33,18 +33,10 @@ export default async function Banner({ movieId }: { movieId: string }) {
                     banner.genres.map(genres => genres.name).join(' • ')}
                 </p>
                 <div>
-                  <MovieActions />
+                  <MovieActions movieId={movieId} />
                 </div>
                 <strong className="text-xl">Overview</strong>
                 <p>{banner?.overview}</p>
-                <div className="flex items-center gap-4">
-                  <Button primary>
-                    <span className="flex items-center gap-2">
-                      <PlayIcon className="w-6 h-6" />
-                      <span>Play trailer</span>
-                    </span>
-                  </Button>
-                </div>
               </div>
             </div>
           </div>
