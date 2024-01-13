@@ -20,13 +20,13 @@ export default async function Page() {
     <div>
       <Heros movies={heros} />
       <Separate distance="50" />
-      <SectionFilm title="Airing Today" movies={airing} />
+      <SectionFilm title="Airing Today" prefix="tv" movies={airing} />
       <Separate distance="40" />
-      <SectionFilm title="On The Air" movies={onTheAir} />
+      <SectionFilm title="On The Air" prefix="tv" movies={onTheAir} />
       <Separate distance="40" />
-      <SectionFilm title="Popular" movies={popular} />
+      <SectionFilm title="Popular" prefix="tv" movies={popular} />
       <Separate distance="40" />
-      <SectionFilm title="Top Rate" movies={topRate} />
+      <SectionFilm title="Top Rate" prefix="tv" movies={topRate} />
     </div>
   )
 }

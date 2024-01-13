@@ -7,7 +7,6 @@ const config = {
     Accept: 'application/json'
   }
 }
-
 // fetch tredding , popular ,  etc via url param
 export async function fetchMovies(address: string) {
   try {
@@ -19,24 +18,20 @@ export async function fetchMovies(address: string) {
     throw new Error('Failed to fetch trending movie')
   }
 }
-// fetch information movie detail from movie Id
-export async function fetchMoviesDetail(id: string) {
+// fetch information movie detail via movie Id
+export async function fetchDetail(address: string) {
   try {
-    const res = await fetch(`${baseUrl}/movie/${id}?language=en-US`, config)
+    const res = await fetch(`${baseUrl}/${address}`, config)
     return res.json()
   } catch (e) {
     console.error(e)
     throw new Error('Failed to fetch movies detail')
   }
 }
-
 // fetch all cast of movie via movie Id param
-export async function fetchCastsOfMovie(id: string) {
+export async function fetchCasts(address: string) {
   try {
-    const res = await fetch(
-      `${baseUrl}/movie/${id}/credits?language=en-US`,
-      config
-    )
+    const res = await fetch(`${baseUrl}${address}`, config)
     const cast = await res.json()
     return cast.cast
   } catch (e) {

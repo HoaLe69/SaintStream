@@ -13,10 +13,9 @@ import VideoPlayer from './social-media/videos'
 
 export default function MovieActions({ movieId }: { movieId: string }) {
   const searchParams = useSearchParams()
-  console.log(searchParams.get('play'))
   const pathname = usePathname()
   const [showVideo, setShowVideo] = useState({
-    videoKey: searchParams.get('play'),
+    videoKey: searchParams.get('play') || '',
     name: ''
   })
   const handlePlayTrailer = () => {

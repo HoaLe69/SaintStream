@@ -19,3 +19,12 @@ export const RECOMMENDATIONS = (id: string): string =>
   `/movie/${id}/recommendations?language=es-US&page=1`
 export const VIDEOS_KEY = (id: string): string =>
   `/movie/${id}/videos?language=en-US`
+export const DETAIL_MOVIES = (id: string): string =>
+  `/movie/${id}?language=en-US`
+export const CAST_MOVIE = (id: string): string =>
+  `/movie/${id}/credits?language=en-US`
+
+//tv detail
+export const DETAIL_TV = (id: string): string => `/tv/${id}?language=en-US`
+export const CAST_TV = (id: string): string =>
+  `/tv/${id}/credits?language=en-US`

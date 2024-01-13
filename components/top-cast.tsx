@@ -9,13 +9,14 @@ import 'swiper/css/navigation'
 
 type Props = {
   casts: Cast[]
+  title: string
 }
 
-export default function TopCast({ casts }: Props) {
+export default function TopCast({ casts, title }: Props) {
   const fallbackAvt = '/images/no-avatar.png'
   return (
     <div className="container mx-auto px-2">
-      <p className="text-xl font-bold mb-2">Top Cast</p>
+      <p className="text-xl font-bold mb-2">{title}</p>
       <Swiper
         modules={[Navigation, Pagination]}
         navigation

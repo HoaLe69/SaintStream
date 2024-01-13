@@ -11,12 +11,16 @@ import 'swiper/css/navigation'
 
 export default function SectionFilm({
   movies,
-  title
+  title,
+  prefix = 'movie'
 }: {
   movies: Movie[]
   title: string
+  prefix?: string
 }) {
+  console.log(prefix)
   if (!movies?.length) return
+  console.log(movies)
   return (
     <div className="container px-2 mx-auto overflow-hidden">
       <h2 className="text-2xl mb-6 font-bold">{title}</h2>
@@ -33,7 +37,7 @@ export default function SectionFilm({
               if (!movie.poster_path) return
               return (
                 <SwiperSlide key={movie?.id} className="!w-max ">
-                  <Link href={`/movie/${movie?.id}`}>
+                  <Link href={`/${prefix}/${movie?.id}`}>
                     <div key={movie?.id} className="transition-all">
                       <div className="relative w-[200px] h-[300px] overflow-hidden rounded-xl">
                         <Image

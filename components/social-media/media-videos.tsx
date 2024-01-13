@@ -26,7 +26,6 @@ export default function MediaVideos({ movieId }: { movieId: string }) {
   useEffect(() => {
     async function getVideoKeys() {
       const res = await fetchMovies(VIDEOS_KEY(movieId))
-      console.log(res)
       setVideos(res)
     }
     getVideoKeys()

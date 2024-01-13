@@ -14,7 +14,9 @@ export type Movie = {
   first_air_date?: string
   vote_average: number
   vote_count: number
+  tagline: string
 }
+
 export type Genres = {
   id: number
   name: string
@@ -67,4 +69,31 @@ export type Video = {
   official: string
   published_at: string
   id: string
+}
+
+/* Type of tv*/
+export type TVSHOW = {
+  adult: false
+  backdrop_path: string
+  created_by: {
+    id: number
+    create_id: string
+    name: string
+    gender: number
+    profile_path: string | null
+  }
+  first_air_date: string
+  genres: Genres[]
+  homepage: string
+  original_name: string
+  id: number
+  last_air_date: string
+  name: string
+  number_of_episodes: string
+  number_of_seasons: number
+  overview: string
+  popularity: number
+  poster_path: number
+  production_countries: ProductionCountry
+  tagline: string
 }
