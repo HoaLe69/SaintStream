@@ -1,6 +1,4 @@
-'use client'
 import { fetchMovies } from '@/lib/data'
-import { VIDEOS_KEY } from '@/lib/endpoint'
 import { Video } from '@/lib/definitions'
 import { PlayIcon } from '@heroicons/react/24/solid'
 import { useEffect, useState } from 'react'
@@ -16,8 +14,11 @@ import VideoPlayer from './videos'
 //   const videos = await fetchMovies(VIDEOS_KEY(movieId))
 //   return videos
 // }
-
-export default function MediaVideos({ movieId }: { movieId: string }) {
+type Props = {
+  movieId: string
+  endpoint: (id: string) => string
+}
+export default function MediaVideos({ movieId, endpoint }: Props) {
   const pathname = usePathname()
   const [videos, setVideos] = useState<Video[]>([])
   const [showVideo, setShowVideo] = useState({ videoKey: '', name: '' })
@@ -25,11 +26,11 @@ export default function MediaVideos({ movieId }: { movieId: string }) {
   // const videoKeys: Video[] = use(getVideoKeys(movieId))
   useEffect(() => {
     async function getVideoKeys() {
-      const res = await fetchMovies(VIDEOS_KEY(movieId))
+      const res = await fetchMovies(endpoint(movieId))
       setVideos(res)
     }
     getVideoKeys()
-  }, [movieId])
+  }, [])
   const createUrl = (key: string, name: string) => {
     window.history.replaceState(null, name, `${pathname}?play=${key}`)
     setShowVideo({ videoKey: key, name: name })

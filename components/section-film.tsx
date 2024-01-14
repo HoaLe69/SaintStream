@@ -18,9 +18,8 @@ export default function SectionFilm({
   title: string
   prefix?: string
 }) {
-  console.log(prefix)
-  if (!movies?.length) return
   console.log(movies)
+  if (!movies?.length) return
   return (
     <div className="container px-2 mx-auto overflow-hidden">
       <h2 className="text-2xl mb-6 font-bold">{title}</h2>

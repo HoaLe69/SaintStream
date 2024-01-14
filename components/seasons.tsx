@@ -12,7 +12,6 @@ type Props = {
   seasons: Season[]
 }
 export default function Seasons({ seasons }: Props) {
-  console.log(seasons)
   return (
     <div className="container px-2 mx-auto">
       <h2 className="text-2xl mb-6 font-bold">Seasons</h2>

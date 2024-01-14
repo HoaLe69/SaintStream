@@ -28,3 +28,9 @@ export const CAST_MOVIE = (id: string): string =>
 export const DETAIL_TV = (id: string): string => `/tv/${id}?language=en-US`
 export const CAST_TV = (id: string): string =>
   `/tv/${id}/credits?language=en-US`
+export const RECOMENDATION_TV = (
+  id: string
+): string => `/tv/${id}/recommendations?language=es-US
+`
+export const VIDEOS_KEY_TV = (id: string): string =>
+  `/tv/${id}/videos?language=en-US`

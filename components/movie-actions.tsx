@@ -7,20 +7,28 @@ import { PlayIcon } from '@heroicons/react/24/solid'
 import { useState } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { fetchMovies } from '@/lib/data'
-import { VIDEOS_KEY } from '@/lib/endpoint'
 import { Video } from '@/lib/definitions'
 import VideoPlayer from './social-media/videos'
+import { VIDEOS_KEY, VIDEOS_KEY_TV } from '@/lib/endpoint'
 
-export default function MovieActions({ movieId }: { movieId: string }) {
+export default function MovieActions({
+  movieId,
+  tvshow
+}: {
+  movieId: string
+  tvshow?: boolean
+}) {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const [showVideo, setShowVideo] = useState({
     videoKey: searchParams.get('play') || '',
     name: ''
   })
+  let endpoint = VIDEOS_KEY
+  if (tvshow) endpoint = VIDEOS_KEY_TV
   const handlePlayTrailer = () => {
     async function getTrailerKey() {
-      const res = await fetchMovies(VIDEOS_KEY(movieId))
+      const res = await fetchMovies(endpoint(movieId))
       if (res) {
         const [video] = res.filter((vd: Video) => vd.type === 'Trailer')
         if (video) {

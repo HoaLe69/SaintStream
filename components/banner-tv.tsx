@@ -1,7 +1,8 @@
+'use server'
 import Image from 'next/image'
 import MovieActions from './movie-actions'
 import { fetchDetail } from '@/lib/data'
-import { DETAIL_TV } from '@/lib/endpoint'
+import { DETAIL_TV, VIDEOS_KEY_TV } from '@/lib/endpoint'
 import { TVSHOW } from '@/lib/definitions'
 
 export default async function BannerTV({ movieId }: { movieId: string }) {
@@ -32,7 +33,7 @@ export default async function BannerTV({ movieId }: { movieId: string }) {
                     banner.genres.map(genres => genres.name).join(' • ')}
                 </p>
                 <div>
-                  <MovieActions movieId={movieId} />
+                  <MovieActions movieId={movieId} tvshow />
                 </div>
                 <strong className="text-xl">Overview</strong>
                 <p>{banner?.overview}</p>

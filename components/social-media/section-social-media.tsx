@@ -2,12 +2,23 @@
 import { useState } from 'react'
 import clsx from 'clsx'
 import MediaVideos from './media-videos'
+import { VIDEOS_KEY, VIDEOS_KEY_TV } from '@/lib/endpoint'
 
-export default function SectionSocial({ movieId }: { movieId: string }) {
+export default function SectionSocial({
+  movieId,
+  tvshow
+}: {
+  movieId: string
+  tvshow?: boolean
+}) {
   const [tabIndex, setTabIndex] = useState<number>(0)
   const tabs = ['Media', 'Reviews', 'Backdrops', 'Posters']
   const handleSwitchTab = (index: number) => {
     setTabIndex(index)
+  }
+  let endpoints = { videoEp: VIDEOS_KEY }
+  if (tvshow) {
+    endpoints = { ...endpoints, videoEp: VIDEOS_KEY_TV }
   }
   return (
     <div className="container mx-auto px-2">
@@ -24,7 +35,7 @@ export default function SectionSocial({ movieId }: { movieId: string }) {
       </div>
       <div className="mt-2">
         <TabPannel id={0} index={tabIndex}>
-          <MediaVideos movieId={movieId} />
+          <MediaVideos movieId={movieId} endpoint={endpoints.videoEp} />
         </TabPannel>
         <TabPannel id={1} index={tabIndex}>
           Reviews
