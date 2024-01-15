@@ -41,28 +41,40 @@ export default function Header() {
             style={{ width: '100%', height: 'auto' }}
           />
         </Link>
-        <nav className="hidden md:flex items-center gap-10">
+        <nav className="hidden md:flex items-center gap-10 transition-all">
           <Link
             href="/"
-            className={clsx('transition-all', {
-              'font-black text-xl': pathname === '/'
-            })}
+            className={clsx(
+              'p-1 border-b-[3px]  transition-all inline-block',
+              {
+                'font-bold border-green-500': pathname === '/'
+              },
+              { 'border-transparent': pathname !== '/' }
+            )}
           >
             Home
           </Link>
           <Link
             href="/tv"
-            className={clsx('transition-all', {
-              'font-black text-xl': pathname === '/tv'
-            })}
+            className={clsx(
+              'transition-all border-b-[3px] inline-block p-1 ',
+              {
+                'font-black border-green-500': pathname === '/tv'
+              },
+              { 'border-transparent': pathname !== '/tv' }
+            )}
           >
             TV Shows
           </Link>
           <Link
             href="/explore"
-            className={clsx('transition-all', {
-              'font-black text-xl': pathname === '/explore'
-            })}
+            className={clsx(
+              'transition-all border-b-[3px] inline-block p-1',
+              {
+                'font-black  border-green-500': pathname === '/explore'
+              },
+              { 'border-transparent': pathname !== '/explore' }
+            )}
           >
             Explore
           </Link>
