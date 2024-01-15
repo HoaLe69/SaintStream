@@ -96,7 +96,7 @@ export type TVSHOW = {
   poster_path: number
   production_countries: ProductionCountry
   tagline: string
-  seasons: Season
+  seasons: Season[]
 }
 
 export type Season = {

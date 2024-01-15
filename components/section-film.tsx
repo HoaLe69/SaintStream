@@ -18,7 +18,6 @@ export default function SectionFilm({
   title: string
   prefix?: string
 }) {
-  console.log(movies)
   if (!movies?.length) return
   return (
     <div className="container px-2 mx-auto overflow-hidden">

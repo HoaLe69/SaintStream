@@ -1,57 +1,67 @@
 'use client'
 import Image from 'next/image'
 import { Season } from '@/lib/definitions'
-import { Navigation, Pagination } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import { StarIcon } from '@heroicons/react/24/solid'
+import Link from 'next/link'
 
 type Props = {
   seasons: Season[]
+  name: string
 }
-export default function Seasons({ seasons }: Props) {
+export default function Seasons({ seasons, name }: Props) {
   return (
-    <div className="container px-2 mx-auto">
-      <h2 className="text-2xl mb-6 font-bold">Seasons</h2>
-      <Swiper
-        modules={[Navigation, Pagination]}
-        navigation
-        slidesPerGroupAuto
-        slidesPerView="auto"
-        spaceBetween={30}
-      >
-        {seasons &&
-          seasons.map((season: Season) => (
-            <SwiperSlide key={season.id} className="!w-max">
-              <div className="flex items-center max-w-[300px] border-2 border-gray-700 rounded-md pr-2">
-                <div className="w-[130px] h-[195px]">
-                  <Image
-                    src={`https://image.tmdb.org/t/p/original${season?.poster_path}`}
-                    width={130}
-                    height={195}
-                    className="h-full w-full"
-                    alt={season.name}
-                  />
-                </div>
-                <div className="ml-4 ">
-                  <p className="font-bold text-xl mb-4">{season.name}</p>
-                  <span>
-                    <span className="rounded-xl flex items-center shadow-red-300 gap-2">
-                      <StarIcon className="w-6 h-6 text-yellow-500" />
-                      {season.vote_average}
-                    </span>
-                    <strong>
-                      {season?.air_date && season.air_date.split('-')[0]}{' '}
-                      &#x2022; Episodes &#x2022; {season.episode_count}
-                    </strong>
-                  </span>
-                </div>
+    <div className="container mx-auto pr-2 relative">
+      <h2 className="text-2xl mb-6 font-bold">Latest Season</h2>
+      {seasons &&
+        seasons.map((season: Season, index: number) => {
+          const overview =
+            season.name +
+            ' of ' +
+            name +
+            'is set to premiere on ' +
+            season.air_date
+          if (index !== seasons.length - 1) return
+          return (
+            <div
+              key={season.id}
+              className="flex items-center w-full overflow-hidden rounded-lg  shadow-[0_2px_10px_rgba(255,255,255,0.1)] "
+            >
+              <div className="w-[130px] shrink-0 h-[195px]">
+                <Image
+                  src={`https://image.tmdb.org/t/p/original${season?.poster_path}`}
+                  width={130}
+                  height={195}
+                  className="h-full w-full"
+                  alt={season.name}
+                />
               </div>
-            </SwiperSlide>
-          ))}
-      </Swiper>
+              <div className="ml-4 ">
+                <p className="font-bold text-xl ">{season.name}</p>
+                <span>
+                  <span className="rounded-xl flex items-center shadow-red-300 gap-2 mb-2">
+                    <StarIcon className="w-6 h-6 text-yellow-500" />
+                    {season.vote_average}
+                  </span>
+                  <strong>
+                    {season?.air_date && season.air_date.split('-')[0]} &#x2022;
+                    Episodes &#x2022; {season.episode_count}
+                  </strong>
+                </span>
+                <p className="text-sm mt-2">
+                  {season?.overview ? season?.overview : overview}
+                </p>
+              </div>
+            </div>
+          )
+        })}
+      <span className="mt-2 inline-block p-1 border-b-2 border-transparent hover:border-green-500 transition-all cursor-pointer duration-400 ">
+        <Link className="font-semibold" href="/">
+          View All Season
+        </Link>
+      </span>
     </div>
   )
 }
