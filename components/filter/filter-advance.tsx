@@ -6,6 +6,8 @@ import { Genre } from '@/lib/definitions'
 import { fetchListGenre } from '@/lib/data'
 import { usePathname } from 'next/navigation'
 import { GENRE_MV, GENRE_TV } from '@/lib/endpoint'
+import FilterRange from './filter-range'
+import FilterDate from './filter-date'
 
 export default function FilterAdvance() {
   const [showFilterAd, setShowFilterAd] = useState<boolean>(true)
@@ -52,6 +54,8 @@ export default function FilterAdvance() {
               </span>
             ))}
         </div>
+        <FilterRange />
+        <FilterDate />
       </div>
     </div>
   )
