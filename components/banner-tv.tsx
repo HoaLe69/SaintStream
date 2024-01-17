@@ -17,7 +17,7 @@ export default async function BannerTV({ movieId }: { movieId: string }) {
       >
         <div className="absolute  inset-0 bg-[rgba(0,0,0,0.7)]">
           <div className="container px-2 mx-auto h-full flex items-end">
-            <div className="py-11 flex  gap-x-10 items-center">
+            <div className="py-11 flex  gap-x-10 items-center ">
               <Image
                 src={`https://image.tmdb.org/t/p/original${banner?.poster_path}`}
                 width={250}
