@@ -2,7 +2,7 @@ export default function FilterRange() {
   return (
     <div className="py-2">
       <p className="py-2">Runtime</p>
-      <div className="flex items-center justify-between mb-2">
+      <div className="flex items-center justify-between mb-2 text-gray-300">
         <span>
           From <strong>0 </strong>min
         </span>

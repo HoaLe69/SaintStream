@@ -39,3 +39,34 @@ export async function fetchCasts(address: string) {
     throw new Error('failed to fetch casts')
   }
 }
+
+// fetch list genre
+export async function fetchListGenre(address: string) {
+  try {
+    const res = await fetch(`${baseUrl}${address}`, config)
+    const data = await res.json()
+    return data.genres
+  } catch (e) {
+    console.error(e)
+    throw new Error('Failed to fetch list genres')
+  }
+}
+
+//fetch list movie , tv discover
+export async function fetchDiscover(
+  type: string,
+  sort_by: string = 'popularity.desc',
+  page: number = 1
+) {
+  try {
+    const res = await fetch(
+      `${baseUrl}/discover/${type}?page=${page}&include_adult=false&language=en-US&include_video=false&sort_by=${sort_by}`,
+      config
+    )
+    const data = await res.json()
+    return data.results
+  } catch (e) {
+    console.error(e)
+    throw new Error(`Failed to fetch ${type} discover`)
+  }
+}

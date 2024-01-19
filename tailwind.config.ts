@@ -16,6 +16,20 @@ const config: Config = {
           'linear-gradient(359deg, #0D0C0F 0.83%, rgba(13, 12, 15, 0.85) 28.55%, rgba(13, 12, 15, 0.00) 48.81%, rgba(13, 12, 15, 0.28) 70.66%, #0D0C0F 103.18%)',
         'dark-to-light':
           'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(13 ,12 , 15 , 0.95) 78.02%)'
+      },
+      keyframes: {
+        col: {
+          '0%': { transform: 'translateY(-100%)' },
+          '100%': { transform: 'translateY(0)' }
+        },
+        expand: {
+          '0%': { height: '40px' },
+          '100%': { height: '200px' }
+        }
+      },
+      animation: {
+        'close-to-open': 'col 1s ease-in-out',
+        'expand-h': 'expand 1s ease-in-out'
       }
     }
   },

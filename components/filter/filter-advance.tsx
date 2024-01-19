@@ -20,7 +20,7 @@ export default function FilterAdvance() {
       if (res) setGenres(res)
     }
     getListGenre()
-  }, [])
+  }, [address])
   return (
     <div className="bg-gray-900 px-2 rounded-md mt-3 ">
       <div
@@ -48,7 +48,7 @@ export default function FilterAdvance() {
             genres.map((genre: Genre) => (
               <span
                 key={genre.id}
-                className="inline-block py-2 px-3 rounded-xl border-2 cursor-pointer hover:opacity-75"
+                className="inline-block text-gray-300 py-2 px-3 rounded-xl border-2 border-gray-200 cursor-pointer hover:opacity-75"
               >
                 {genre.name}
               </span>

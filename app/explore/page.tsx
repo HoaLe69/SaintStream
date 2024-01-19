@@ -1,3 +1,38 @@
-export default async function Page() {
-  return <div></div>
+import FilterFilm from '@/components/filter/filter'
+import { fetchDiscover } from '@/lib/data'
+import Card from '@/components/card'
+import { Movie } from '@/lib/definitions'
+
+export default async function Page({
+  searchParams
+}: {
+  searchParams: { sort_by?: string }
+}) {
+  const discover = await fetchDiscover('tv', searchParams?.sort_by)
+  return (
+    <div className="pt-24 max-w-[1400px] mx-auto px-2">
+      <div className="flex items-start gap-x-10">
+        <div className="w-[300px] shrink-0">
+          <FilterFilm />
+        </div>
+        <div className="flex-1 flex flex-wrap gap-4">
+          {discover &&
+            discover.map((movie: Movie) => {
+              if (!movie?.poster_path) return
+              const filmInfor = {
+                id: movie?.id,
+                poster_path: movie?.poster_path,
+                original_name: movie?.original_name,
+                original_title: movie?.original_title,
+                vote_average: movie?.vote_average,
+                release_date: movie?.release_date,
+                first_air_date: movie?.first_air_date,
+                prefix: 'tv'
+              }
+              return <Card key={movie?.id} {...filmInfor} />
+            })}
+        </div>
+      </div>
+    </div>
+  )
 }

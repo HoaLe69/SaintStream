@@ -17,7 +17,7 @@ export type Movie = {
   tagline: string
 }
 
-export type Genres = {
+export type Genre = {
   id: number
   name: string
 }
@@ -33,7 +33,7 @@ export type ProductionCountry = {
 }
 export type MovieDetail = Movie & {
   budget: number
-  genres: Genres[]
+  genres: Genre[]
   homepage: string
   production_companies: ProductionCompany[]
   production_countries: ProductionCountry[]
@@ -83,7 +83,7 @@ export type TVSHOW = {
     profile_path: string | null
   }
   first_air_date: string
-  genres: Genres[]
+  genres: Genre[]
   homepage: string
   original_name: string
   id: number
