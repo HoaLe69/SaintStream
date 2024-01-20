@@ -6,9 +6,13 @@ import { Movie } from '@/lib/definitions'
 export default async function Page({
   searchParams
 }: {
-  searchParams: { sort_by?: string }
+  searchParams: { sort_by?: string; genres?: string }
 }) {
-  const discover = await fetchDiscover('tv', searchParams?.sort_by)
+  const discover = await fetchDiscover(
+    'tv',
+    searchParams?.sort_by,
+    searchParams?.genres
+  )
   return (
     <div className="pt-24 max-w-[1400px] mx-auto px-2">
       <div className="flex items-start gap-x-10">

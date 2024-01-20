@@ -56,13 +56,21 @@ export async function fetchListGenre(address: string) {
 export async function fetchDiscover(
   type: string,
   sort_by: string = 'popularity.desc',
+  with_genres?: string,
   page: number = 1
 ) {
   try {
     const res = await fetch(
-      `${baseUrl}/discover/${type}?page=${page}&include_adult=false&language=en-US&include_video=false&sort_by=${sort_by}`,
+      `${baseUrl}/discover/${type}?page=${page}&${
+        with_genres && 'with_genres=' + with_genres
+      }&include_adult=false&language=en-US&include_video=false&sort_by=${sort_by}`,
       config
     )
+    // console.log(
+    //   `${baseUrl}/discover/${type}?page=${page}&${
+    //     with_genres && 'with_genres=' + with_genres
+    //   }&include_adult=false&language=en-US&include_video=false&sort_by=${sort_by}`
+    // )
     const data = await res.json()
     return data.results
   } catch (e) {
