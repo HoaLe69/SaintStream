@@ -57,20 +57,18 @@ export async function fetchDiscover(
   type: string,
   sort_by: string = 'popularity.desc',
   with_genres?: string,
+  with_runtime?: string,
   page: number = 1
 ) {
   try {
-    const res = await fetch(
-      `${baseUrl}/discover/${type}?page=${page}&${
-        with_genres && 'with_genres=' + with_genres
-      }&include_adult=false&language=en-US&include_video=false&sort_by=${sort_by}`,
-      config
-    )
-    // console.log(
-    //   `${baseUrl}/discover/${type}?page=${page}&${
-    //     with_genres && 'with_genres=' + with_genres
-    //   }&include_adult=false&language=en-US&include_video=false&sort_by=${sort_by}`
-    // )
+    const url = `${baseUrl}/discover/${type}?page=${page}&${
+      with_genres && 'with_genres=' + with_genres
+    }&include_adult=false&language=en-US&with_runtime.gte=0&${
+      with_runtime && 'with_runtime.lte=' + with_runtime
+    }&include_video=false&sort_by=${sort_by}`
+    console.log(url)
+    const res = await fetch(url, config)
+
     const data = await res.json()
     return data.results
   } catch (e) {

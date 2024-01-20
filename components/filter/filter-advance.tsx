@@ -17,7 +17,6 @@ export default function FilterAdvance() {
   const searchParams = useSearchParams()
   const address = pathname === '/explore' ? GENRE_MV : GENRE_TV
   const genresSelected = searchParams.getAll('genres')
-  console.log(genresSelected)
   useEffect(() => {
     async function getListGenre() {
       const res = await fetchListGenre(address)
