@@ -58,14 +58,24 @@ export async function fetchDiscover(
   sort_by: string = 'popularity.desc',
   with_genres?: string,
   with_runtime?: string,
+  from?: string,
+  to?: string,
   page: number = 1
 ) {
   try {
+    const fromDate =
+      type === 'tv'
+        ? 'air_date.gte=' + from
+        : 'primary_release_date.gte=' + from
+    const toDate =
+      type === 'tv' ? 'air_date.lte' + to : 'primary_release_date.lte' + to
     const url = `${baseUrl}/discover/${type}?page=${page}&${
-      with_genres && 'with_genres=' + with_genres
-    }&include_adult=false&language=en-US&with_runtime.gte=0&${
-      with_runtime && 'with_runtime.lte=' + with_runtime
-    }&include_video=false&sort_by=${sort_by}`
+      with_genres ? 'with_genres=' + with_genres + '&' : ''
+    }include_adult=false&language=en-US&with_runtime.gte=0&${
+      with_runtime ? 'with_runtime.lte=' + with_runtime + '&' : ''
+    }${from ? fromDate + '&' : ''}${
+      to ? toDate + '&' : ''
+    }include_video=false&sort_by=${sort_by}`
     console.log(url)
     const res = await fetch(url, config)
 
