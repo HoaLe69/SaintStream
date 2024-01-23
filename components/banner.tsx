@@ -3,7 +3,7 @@ import { fetchDetail } from '@/lib/data'
 import { MovieDetail } from '@/lib/definitions'
 import Image from 'next/image'
 import MovieActions from './movie-actions'
-import { DETAIL_MOVIES, VIDEOS_KEY } from '@/lib/endpoint'
+import { DETAIL_MOVIES } from '@/lib/endpoint'
 
 export default async function Banner({ movieId }: { movieId: string }) {
   const banner: MovieDetail = await fetchDetail(DETAIL_MOVIES(movieId))

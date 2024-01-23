@@ -1,5 +1,6 @@
 'use client'
 import { useSearchParams, usePathname, useRouter } from 'next/navigation'
+
 export default function FilterDate() {
   const pathname = usePathname()
   const { replace } = useRouter()
