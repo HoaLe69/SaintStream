@@ -1,11 +1,11 @@
 'use client'
 import Image from 'next/image'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
-import { Button } from './button'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
 import { useRef } from 'react'
+import UserProfile from './user-profile'
 
 export default function Header() {
   const ref = useRef<HTMLHeadElement>(null)
@@ -28,7 +28,7 @@ export default function Header() {
   return (
     <header
       ref={ref}
-      className="h-[80px] fixed top-0 right-0 left-0 z-50 transition-all"
+      className="h-[60px] fixed top-0 right-0 left-0 z-50 transition-all"
     >
       <div className="container px-2 flex  items-center justify-between mx-auto h-full">
         <Link href="/">
@@ -81,7 +81,7 @@ export default function Header() {
         </nav>
         <div className="flex items-center gap-3">
           <MagnifyingGlassIcon className="w-6 h-6" />
-          <Button primary>Login</Button>
+          <UserProfile />
         </div>
       </div>
     </header>

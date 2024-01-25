@@ -3,6 +3,7 @@ import './globals.css'
 import { quicksand } from '@/components/fonts'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
+import { SessionProvider } from 'next-auth/react'
 
 export const metadata: Metadata = {
   title: 'Movies',
@@ -18,9 +19,11 @@ export default function RootLayout({
       <body
         className={`w-screen overflow-x-hidden ${quicksand.className}   antialiased  `}
       >
-        <Header />
-        {children}
-        <Footer />
+        <SessionProvider>
+          <Header />
+          {children}
+          <Footer />
+        </SessionProvider>
       </body>
     </html>
   )
