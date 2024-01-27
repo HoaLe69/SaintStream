@@ -1,23 +1,29 @@
-import Heros from '@/components/heros'
-import SectionFilm from '@/components/section-film'
 import Separate from '@/components/separate'
-import { fetchMovies } from '@/lib/data'
-import { TRENDING, TOP_RATE, POPULAR, UP_COMING } from '@/lib/endpoint'
+import SectionFilm from '@/components/seciton-film'
+import { Suspense } from 'react'
+import HerosSection from '@/components/heros-section'
 
 export default async function Home() {
-  const heros = await fetchMovies(TRENDING)
-  const popular = await fetchMovies(POPULAR)
-  const topRate = await fetchMovies(TOP_RATE)
-  const upComing = await fetchMovies(UP_COMING)
   return (
     <main className="text-3xl">
-      <Heros movies={heros} />
+      <Suspense fallback={<p>Loading....</p>}>
+        <HerosSection type="mv" />
+      </Suspense>
+      <Suspense fallback={<p>Loading...</p>}>
+        <SectionFilm type="trending_mv" title="Trending" />
+      </Suspense>
       <Separate distance="40" />
-      <SectionFilm title="Popular" movies={popular} />
+      <Suspense fallback={<p>Loading....</p>}>
+        <SectionFilm type="popular_mv" title="Popular" />
+      </Suspense>
       <Separate distance="40" />
-      <SectionFilm title="Top rate" movies={topRate} />
+      <Suspense fallback={<p>Loading...</p>}>
+        <SectionFilm type="top_rated_mv" title="Top rated" />{' '}
+      </Suspense>
       <Separate distance="40" />
-      <SectionFilm title="Up coming" movies={upComing} />
+      <Suspense fallback={<p>Loading...</p>}>
+        <SectionFilm type="up_coming_mv" title="Up Comming" />
+      </Suspense>
     </main>
   )
 }

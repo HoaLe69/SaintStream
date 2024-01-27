@@ -35,3 +35,16 @@ export const VIDEOS_KEY_TV = (id: string): string =>
 // fetch list genre movie and tv
 export const GENRE_TV = '/genre/tv/list?language=en'
 export const GENRE_MV = '/genre/movie/list?language=en'
+
+export const enpoints: Record<string, string> = {
+  trending_mv: TRENDING,
+  now_playing_mv: NOW_PLAYING,
+  popular_mv: POPULAR,
+  top_rated_mv: TOP_RATE,
+  up_coming_mv: UP_COMING,
+  trending_tv: TRENDING_TV,
+  airing_today_tv: AIRING_TODAY,
+  on_the_air_tv: ON_THE_AIR,
+  popular_tv: POPULAR_TV,
+  top_rated_tv: TOP_RATE_TV
+}

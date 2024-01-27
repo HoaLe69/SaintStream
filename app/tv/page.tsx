@@ -1,32 +1,33 @@
 import Heros from '@/components/heros'
 import { fetchMovies } from '@/lib/data'
-import {
-  TRENDING_TV,
-  AIRING_TODAY,
-  ON_THE_AIR,
-  POPULAR_TV,
-  TOP_RATE_TV
-} from '@/lib/endpoint'
-import SectionFilm from '@/components/section-film'
+import FilmCarousels from '@/components/film-carousels'
 import Separate from '@/components/separate'
+import { Suspense } from 'react'
+import SectionFilm from '@/components/seciton-film'
+import HerosSection from '@/components/heros-section'
 
 export default async function Page() {
-  const heros = await fetchMovies(TRENDING_TV)
-  const airing = await fetchMovies(AIRING_TODAY)
-  const onTheAir = await fetchMovies(ON_THE_AIR)
-  const popular = await fetchMovies(POPULAR_TV)
-  const topRate = await fetchMovies(TOP_RATE_TV)
   return (
     <div>
-      <Heros movies={heros} />
+      <Suspense fallback={<p>Loading...</p>}>
+        <HerosSection type="tv" />
+      </Suspense>
       <Separate distance="50" />
-      <SectionFilm title="Airing Today" prefix="tv" movies={airing} />
+      <Suspense fallback={<p>Loading..</p>}>
+        <SectionFilm type="airing_today_tv" title="Airing Today" />
+      </Suspense>
       <Separate distance="40" />
-      <SectionFilm title="On The Air" prefix="tv" movies={onTheAir} />
+      <Suspense fallback={<p>Loading...</p>}>
+        <SectionFilm type="on_the_air_tv" title="On The Air" />
+      </Suspense>
       <Separate distance="40" />
-      <SectionFilm title="Popular" prefix="tv" movies={popular} />
+      <Suspense fallback={<p>Loading...</p>}>
+        <SectionFilm type="popular_tv" title="Popular" />
+      </Suspense>
       <Separate distance="40" />
-      <SectionFilm title="Top Rate" prefix="tv" movies={topRate} />
+      <Suspense fallback={<p>Loading...</p>}>
+        <SectionFilm type="top_rated_tv" title="Top Rated" />
+      </Suspense>
     </div>
   )
 }

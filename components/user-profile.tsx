@@ -5,7 +5,6 @@ import { useSession } from 'next-auth/react'
 
 export default function UserProfile() {
   const session = useSession()
-  console.log(session)
   if (!session?.data?.user) {
     return <Button primary>Login</Button>
   }

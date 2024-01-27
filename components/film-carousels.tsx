@@ -7,16 +7,16 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 
-export default function SectionFilm({
-  movies,
+export default function FilmCarousels({
+  films,
   title,
   prefix = 'movie'
 }: {
-  movies: Movie[]
+  films: Movie[]
   title: string
   prefix?: string
 }) {
-  if (!movies?.length) return
+  if (!films?.length) return
   return (
     <div className="container px-2 mx-auto overflow-hidden">
       <h2 className="text-2xl mb-6 font-bold">{title}</h2>
@@ -28,8 +28,8 @@ export default function SectionFilm({
           slidesPerGroupAuto
           spaceBetween={30}
         >
-          {movies &&
-            movies.map((movie: Movie) => {
+          {films &&
+            films.map((movie: Movie) => {
               if (!movie.poster_path) return
               const filmInfor = {
                 id: movie?.id,

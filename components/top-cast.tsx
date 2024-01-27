@@ -3,17 +3,35 @@ import { Cast } from '@/lib/definitions'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination } from 'swiper/modules'
+import { fetchCasts } from '@/lib/data'
+import { CAST_TV, CAST_MOVIE } from '@/lib/endpoint'
+import { useParams, usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 
 type Props = {
-  casts: Cast[]
   title: string
 }
 
-export default function TopCast({ casts, title }: Props) {
+export default function TopCast({ title }: Props) {
+  const [casts, setCasts] = useState<Cast[]>([])
+  const pathname = usePathname()
+  const { id } = useParams()
+  useEffect(() => {
+    const endpoint = pathname.includes('tv')
+      ? CAST_TV(id.toString())
+      : CAST_MOVIE(id.toString())
+    console.log(endpoint)
+    async function getCasts() {
+      const res = await fetchCasts(endpoint)
+      if (res) setCasts(res)
+    }
+    getCasts()
+  }, [id, pathname])
   const fallbackAvt = '/images/no-avatar.png'
+  // if (!casts.length) return <p>loading...</p>
   return (
     <div className="container mx-auto px-2">
       <p className="text-xl font-bold mb-2">{title}</p>
