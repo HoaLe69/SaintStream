@@ -9,6 +9,7 @@ import { GENRE_MV, GENRE_TV } from '@/lib/endpoint'
 import FilterRange from './filter-range'
 import FilterDate from './filter-date'
 import Link from 'next/link'
+import { Spinner } from '../loading/skeletons'
 
 export default function FilterAdvance() {
   const [showFilterAd, setShowFilterAd] = useState<boolean>(true)
@@ -58,7 +59,7 @@ export default function FilterAdvance() {
       >
         <p className="py-2">Genre</p>
         <div className="flex flex-wrap gap-2 max-h-[250px] overflow-y-scroll">
-          {genres &&
+          {genres.length > 0 ? (
             genres.map((genre: Genre) => {
               const isGenreSelected = genresSelected.includes(
                 genre.id.toString()
@@ -75,7 +76,12 @@ export default function FilterAdvance() {
                   </span>
                 </Link>
               )
-            })}
+            })
+          ) : (
+            <div className="w-full min-h-[250px] flex items-center justify-center">
+              <Spinner />
+            </div>
+          )}
         </div>
         <FilterRange />
         <FilterDate />

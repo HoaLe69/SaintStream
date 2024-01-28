@@ -2,11 +2,6 @@ import FilterFilm from '@/components/filter/filter'
 import { fetchDiscover } from '@/lib/data'
 import Card from '@/components/card'
 import { Movie } from '@/lib/definitions'
-import {
-  BannerSkeleton,
-  CardSkeletons,
-  SectionFilmSkeletons
-} from '@/components/loading/skeletons'
 
 export default async function Page({
   searchParams
@@ -19,6 +14,7 @@ export default async function Page({
     to?: string
   }
 }) {
+  await new Promise(resolve => setTimeout(resolve, 4000))
   const discover = await fetchDiscover(
     'tv',
     searchParams?.sort_by,
@@ -51,7 +47,6 @@ export default async function Page({
             })}
         </div>
       </div>
-      <SectionFilmSkeletons title="hi"></SectionFilmSkeletons>
     </div>
   )
 }

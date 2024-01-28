@@ -10,8 +10,6 @@ const config = {
 // fetch tredding , popular ,  etc via url param
 export async function fetchMovies(address: string) {
   try {
-    await new Promise(resolve => setTimeout(resolve, 2000))
-
     const res = await fetch(`${baseUrl}${address}`, config)
     const data = await res.json()
     return data.results

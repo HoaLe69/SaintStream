@@ -21,6 +21,9 @@ const config: Config = {
         shimmer: {
           '0%': { opacity: '0.5' },
           '100%': { opacity: '1' }
+        },
+        blur: {
+          '100%': { scale: '1', filter: 'blur(0)' }
         }
       }
     }
