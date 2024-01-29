@@ -15,19 +15,19 @@ export default async function Page() {
       </Suspense>
       <Separate distance="50" />
       <Suspense fallback={<SectionFilmSkeletons title="Airing Today" />}>
-        <SectionFilm type="airing_today_tv" title="Airing Today" />
+        <SectionFilm type="airing_today_tv" title="Airing Today" prefix="tv" />
       </Suspense>
       <Separate distance="40" />
       <Suspense fallback={<SectionFilmSkeletons title="On The Air" />}>
-        <SectionFilm type="on_the_air_tv" title="On The Air" />
+        <SectionFilm type="on_the_air_tv" title="On The Air" prefix="tv" />
       </Suspense>
       <Separate distance="40" />
       <Suspense fallback={<SectionFilmSkeletons title="Popular" />}>
-        <SectionFilm type="popular_tv" title="Popular" />
+        <SectionFilm type="popular_tv" title="Popular" prefix="tv" />
       </Suspense>
       <Separate distance="40" />
       <Suspense fallback={<SectionFilmSkeletons title="Top Rated" />}>
-        <SectionFilm type="top_rated_tv" title="Top Rated" />
+        <SectionFilm type="top_rated_tv" title="Top Rated" prefix="tv" />
       </Suspense>
     </div>
   )

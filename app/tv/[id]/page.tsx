@@ -21,7 +21,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       <Separate distance="40" />
       <Seasons seasons={seasons.seasons} name={seasons.original_name} />
       <Separate distance="40" />
-      <FilmCarousels prefix="tv" title="Recommendations" movies={recommen} />
+      <FilmCarousels prefix="tv" title="Recommendations" films={recommen} />
     </div>
   )
 }

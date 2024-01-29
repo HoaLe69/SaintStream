@@ -4,19 +4,19 @@ import { ChevronRightIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
 import { useEffect, useState } from 'react'
 import { Genre } from '@/lib/definitions'
 import { fetchListGenre } from '@/lib/data'
-import { usePathname, useSearchParams } from 'next/navigation'
-import { GENRE_MV, GENRE_TV } from '@/lib/endpoint'
+import { usePathname, useSearchParams, useRouter } from 'next/navigation'
+import { GENRE } from '@/lib/endpoint'
 import FilterRange from './filter-range'
 import FilterDate from './filter-date'
-import Link from 'next/link'
 import { Spinner } from '../loading/skeletons'
 
-export default function FilterAdvance() {
+export default function FilterAdvance({ type }: { type: string }) {
   const [showFilterAd, setShowFilterAd] = useState<boolean>(true)
   const [genres, setGenres] = useState<Genre[]>([])
+  const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const address = pathname === '/explore' ? GENRE_MV : GENRE_TV
+  const address = GENRE(type)
   const genresSelected = searchParams.getAll('genres')
   useEffect(() => {
     async function getListGenre() {
@@ -25,7 +25,7 @@ export default function FilterAdvance() {
     }
     getListGenre()
   }, [address])
-  const createUrl = (genreId: string): string => {
+  const handleSelectGenre = (genreId: string) => {
     const params = new URLSearchParams(searchParams)
     if (!params.has('genres', genreId))
       if (searchParams.get('genres')) {
@@ -34,7 +34,7 @@ export default function FilterAdvance() {
     else {
       params.delete('genres', genreId)
     }
-    return `${pathname}?${params.toString()}`
+    router.push(`${pathname}?${params.toString()}`)
   }
   return (
     <div className="bg-gray-900 px-2 rounded-md mt-3 ">
@@ -65,16 +65,16 @@ export default function FilterAdvance() {
                 genre.id.toString()
               )
               return (
-                <Link key={genre.id} href={createUrl(genre.id.toString())}>
-                  <span
-                    className={clsx(
-                      'inline-block text-gray-300 py-2 px-3 rounded-xl border-2 border-gray-200 cursor-pointer hover:opacity-75',
-                      { 'bg-green-500 text-white font-bold': isGenreSelected }
-                    )}
-                  >
-                    {genre.name}
-                  </span>
-                </Link>
+                <span
+                  onClick={() => handleSelectGenre(genre.id.toString())}
+                  key={genre.id}
+                  className={clsx(
+                    'inline-block text-gray-300 py-2 px-3 rounded-xl border-2 border-gray-200 cursor-pointer hover:opacity-75',
+                    { 'bg-green-500 text-white font-bold': isGenreSelected }
+                  )}
+                >
+                  {genre.name}
+                </span>
               )
             })
           ) : (

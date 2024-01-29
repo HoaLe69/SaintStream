@@ -10,6 +10,17 @@ export function BannerSkeleton() {
   )
 }
 
+export function DiscoverSkeletons() {
+  const dis = 'discover for you'
+  return (
+    <div className="flex-1 flex flex-wrap gap-4">
+      {dis.split('').map((t, index) => (
+        <CardSkeletons key={index} />
+      ))}
+    </div>
+  )
+}
+
 export function SectionFilmSkeletons({ title }: { title: string }) {
   return (
     <div className="container px-2 mx-auto overflow-hidden">

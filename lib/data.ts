@@ -63,12 +63,13 @@ export async function fetchDiscover(
   page: number = 1
 ) {
   try {
+    // await new Promise(resolve => setTimeout(resolve, 4000))
     const fromDate =
       type === 'tv'
         ? 'air_date.gte=' + from
         : 'primary_release_date.gte=' + from
     const toDate =
-      type === 'tv' ? 'air_date.lte' + to : 'primary_release_date.lte' + to
+      type === 'tv' ? 'air_date.lte=' + to : 'primary_release_date.lte' + to
     const url = `${baseUrl}/discover/${type}?page=${page}&${
       with_genres ? 'with_genres=' + with_genres + '&' : ''
     }include_adult=false&language=en-US&with_runtime.gte=0&${
@@ -76,7 +77,8 @@ export async function fetchDiscover(
     }${from ? fromDate + '&' : ''}${
       to ? toDate + '&' : ''
     }include_video=false&sort_by=${sort_by}`
-    const res = await fetch(url, config)
+
+    const res = await fetch(url, { ...config })
 
     const data = await res.json()
     return data.results

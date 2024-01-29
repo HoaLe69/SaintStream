@@ -36,6 +36,8 @@ export const VIDEOS_KEY_TV = (id: string): string =>
 export const GENRE_TV = '/genre/tv/list?language=en'
 export const GENRE_MV = '/genre/movie/list?language=en'
 
+export const GENRE = (type: string): string => `/genre/${type}/list?language=en`
+
 export const enpoints: Record<string, string> = {
   trending_mv: TRENDING,
   now_playing_mv: NOW_PLAYING,

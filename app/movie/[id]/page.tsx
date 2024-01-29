@@ -24,11 +24,11 @@ export default async function Page({ params }: { params: { id: string } }) {
       </Suspense>
       <Separate distance="40" />
       <Suspense fallback={<p>Loading...</p>}>
-        <FilmCarousels title="Similar movies for you" movies={similarMovies} />
+        <FilmCarousels title="Similar movies for you" films={similarMovies} />
       </Suspense>
       <Separate distance="40" />
       <Suspense fallback={<p>Loading...</p>}>
-        <FilmCarousels title="Recommendation" movies={recommendations} />
+        <FilmCarousels title="Recommendation" films={recommendations} />
       </Suspense>
       <BannerSkeleton />
     </div>
