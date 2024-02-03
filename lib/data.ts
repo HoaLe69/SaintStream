@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 const accessToken = process.env.NEXT_PUBLIC_TMDB_ACCESS_TOKEN
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
 
@@ -54,7 +55,7 @@ export async function fetchListGenre(address: string) {
 
 //fetch list movie , tv discover
 export async function fetchDiscover(
-  type: string,
+  type: string = 'tv',
   sort_by: string = 'popularity.desc',
   with_genres?: string,
   with_runtime?: string,
@@ -68,16 +69,26 @@ export async function fetchDiscover(
       type === 'tv'
         ? 'air_date.gte=' + from
         : 'primary_release_date.gte=' + from
-    const toDate =
-      type === 'tv' ? 'air_date.lte=' + to : 'primary_release_date.lte' + to
-    const url = `${baseUrl}/discover/${type}?page=${page}&${
-      with_genres ? 'with_genres=' + with_genres + '&' : ''
-    }include_adult=false&language=en-US&with_runtime.gte=0&${
-      with_runtime ? 'with_runtime.lte=' + with_runtime + '&' : ''
-    }${from ? fromDate + '&' : ''}${
-      to ? toDate + '&' : ''
-    }include_video=false&sort_by=${sort_by}`
 
+    const toDate =
+      type === 'tv' ? 'air_date.lte=' + to : 'primary_release_date.lte=' + to
+
+    const url = clsx(
+      `${baseUrl}/discover/${type}?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=${sort_by}&with_runtime.gte=0`,
+      with_genres && `&with_genres=${with_genres}`,
+      with_runtime && `&with_runtime.lte=${with_runtime}`,
+      from && `&${fromDate}`,
+      to && `&${toDate}`
+    )
+    // console.log(toggleUrl)
+    // const url = `${baseUrl}/discover/${type}?page=${page}&${
+    //   with_genres ? 'with_genres=' + with_genres + '&' : ''
+    // }include_adult=false&language=en-US&with_runtime.gte=0&${
+    //   with_runtime ? 'with_runtime.lte=' + with_runtime + '&' : ''
+    // }${from ? fromDate + '&' : ''}${
+    //   to ? toDate + '&' : ''
+    // }include_video=false&sort_by=${sort_by}`
+    //
     const res = await fetch(url, { ...config })
 
     const data = await res.json()

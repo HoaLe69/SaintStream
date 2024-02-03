@@ -43,7 +43,7 @@ export default function Card({
               <span className="flex items-center">
                 <StarIcon className="w-6 h-6 text-yellow-400" />
                 <span className="text-sm font-semibold">
-                  {vote_average.toFixed(1)}
+                  {vote_average && vote_average.toFixed(1)}
                 </span>
               </span>
               <p className="text-xs leading-3 text-gray-400 pl-2 border-l-2 border-gray-400">

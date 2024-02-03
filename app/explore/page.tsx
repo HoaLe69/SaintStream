@@ -3,6 +3,7 @@ import { Suspense } from 'react'
 import ContainerDiscoverFilm from '@/components/container-discover-film'
 import { DiscoverSkeletons } from '@/components/loading/skeletons'
 import BreadCrumbs from '@/components/breadcrumbs'
+import ScrollTopButton from '@/components/scroll-top-button'
 
 export default function Page({
   searchParams
@@ -14,6 +15,7 @@ export default function Page({
     minRuntime?: string
     from?: string
     to?: string
+    page?: number
   }
 }) {
   // const discover = await fetchDiscover(
@@ -24,7 +26,15 @@ export default function Page({
   //   searchParams?.from,
   //   searchParams?.to
   // )
-  const { type = 'tv', sort_by, minRuntime, genres, from, to } = searchParams
+  const {
+    type = 'tv',
+    sort_by,
+    minRuntime,
+    genres,
+    from,
+    to,
+    page = 1
+  } = searchParams
   return (
     <div className="pt-24 max-w-[1400px] mx-auto px-2 min-h-screen">
       <div className="flex items-start gap-x-10">
@@ -43,10 +53,12 @@ export default function Page({
               minRuntime={minRuntime}
               from={from}
               to={to}
+              page={page}
             />
           </Suspense>
         </div>
       </div>
+      <ScrollTopButton />
     </div>
   )
 }
