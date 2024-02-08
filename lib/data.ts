@@ -98,3 +98,15 @@ export async function fetchDiscover(
     throw new Error(`Failed to fetch ${type} discover`)
   }
 }
+
+// fetch backdrops images
+export async function fetchImage(address: string) {
+  try {
+    const res = await fetch(`${baseUrl}${address}`, config)
+    const images = await res.json()
+    return images.backdrops
+  } catch (e) {
+    console.error(e)
+    throw new Error('failed to fetch Image about film')
+  }
+}

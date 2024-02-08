@@ -1,7 +1,8 @@
 'use client'
 import { useState } from 'react'
 import clsx from 'clsx'
-import MediaVideos from './media-videos'
+import MediaVideos from './section-media-videos'
+import MediaBackdrop from './section-media-backdrops'
 import { VIDEOS_KEY, VIDEOS_KEY_TV } from '@/lib/endpoint'
 
 export default function SectionSocial({
@@ -20,6 +21,12 @@ export default function SectionSocial({
   if (tvshow) {
     endpoints = { ...endpoints, videoEp: VIDEOS_KEY_TV }
   }
+
+  const section: { [key: number]: React.ReactNode } = {
+    0: <MediaVideos movieId={movieId} endpoint={endpoints.videoEp} />,
+    2: <MediaBackdrop />
+  }
+
   return (
     <div className="container mx-auto px-2">
       <div className="flex items-center gap-x-5 ">
@@ -34,36 +41,13 @@ export default function SectionSocial({
         ))}
       </div>
       <div className="mt-2">
-        <TabPannel id={0} index={tabIndex}>
-          <MediaVideos movieId={movieId} endpoint={endpoints.videoEp} />
-        </TabPannel>
-        <TabPannel id={1} index={tabIndex}>
-          Reviews
-        </TabPannel>
-        <TabPannel id={2} index={tabIndex}>
-          Back drop
-        </TabPannel>
-        <TabPannel id={3} index={tabIndex}>
-          poster
-        </TabPannel>
+        <TabPannel>{section[tabIndex]}</TabPannel>
       </div>
     </div>
   )
 }
-function TabPannel({
-  children,
-  id,
-  index
-}: {
-  children: React.ReactNode
-  id: number
-  index?: number
-}) {
-  return (
-    <span className={clsx('hidden', { '!block': id === index })}>
-      {children}
-    </span>
-  )
+function TabPannel({ children }: { children: React.ReactNode }) {
+  return <span>{children}</span>
 }
 function TabItems({
   title,

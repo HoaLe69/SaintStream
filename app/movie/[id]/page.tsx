@@ -30,7 +30,6 @@ export default async function Page({ params }: { params: { id: string } }) {
       <Suspense fallback={<p>Loading...</p>}>
         <FilmCarousels title="Recommendation" films={recommendations} />
       </Suspense>
-      <BannerSkeleton />
     </div>
   )
 }

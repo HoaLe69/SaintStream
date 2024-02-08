@@ -38,6 +38,10 @@ export const GENRE_MV = '/genre/movie/list?language=en'
 
 export const GENRE = (type: string): string => `/genre/${type}/list?language=en`
 
+// get backdrop
+export const IMAGES_MV = (id: string): string => `/movie/${id}/images`
+export const IMAGES_TV = (id: string): string => `/tv/${id}/images`
+
 export const enpoints: Record<string, string> = {
   trending_mv: TRENDING,
   now_playing_mv: NOW_PLAYING,

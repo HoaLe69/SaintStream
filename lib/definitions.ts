@@ -109,3 +109,13 @@ export type Season = {
   season_number: number
   vote_average: number
 }
+
+// type backdrops
+export type Backdrop = {
+  aspect_ratio: number
+  height: number
+  file_path: string
+  vote_average: number
+  vote_count: number
+  width: number
+}

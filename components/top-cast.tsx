@@ -23,7 +23,6 @@ export default function TopCast({ title }: Props) {
     const endpoint = pathname.includes('tv')
       ? CAST_TV(id.toString())
       : CAST_MOVIE(id.toString())
-    console.log(endpoint)
     async function getCasts() {
       const res = await fetchCasts(endpoint)
       if (res) setCasts(res)
