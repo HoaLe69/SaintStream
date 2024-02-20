@@ -4,7 +4,7 @@ import { useRef } from 'react'
 
 export default function ScrollTopButton() {
   const refButton = useRef<HTMLButtonElement>(null)
-  if (typeof window !== undefined) {
+  if (typeof window !== 'undefined') {
     window.addEventListener('scroll', () => {
       const elBtn = refButton?.current
       const scrollY = window.scrollY

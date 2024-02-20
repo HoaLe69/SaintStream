@@ -41,6 +41,11 @@ export const GENRE = (type: string): string => `/genre/${type}/list?language=en`
 // get backdrop
 export const IMAGES_MV = (id: string): string => `/movie/${id}/images`
 export const IMAGES_TV = (id: string): string => `/tv/${id}/images`
+//get feedback from watcher
+export const FEEDBACK_MV = (id: string): string =>
+  `/movie/${id}/reviews?language=en-US&page=1`
+export const FEEDBACK_TV = (id: string): string =>
+  `/tv/${id}/reviews?language=en-US&page=1`
 
 export const enpoints: Record<string, string> = {
   trending_mv: TRENDING,

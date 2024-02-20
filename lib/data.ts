@@ -110,3 +110,15 @@ export async function fetchImage(address: string) {
     throw new Error('failed to fetch Image about film')
   }
 }
+
+// fetch feedback
+export async function fetchReview(address: string) {
+  try {
+    const res = await fetch(`${baseUrl}${address}`, config)
+    const data = await res.json()
+    return data.results
+  } catch (e) {
+    console.error(e)
+    throw new Error('failed to fetch review')
+  }
+}

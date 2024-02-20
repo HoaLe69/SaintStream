@@ -3,6 +3,7 @@ import { useState } from 'react'
 import clsx from 'clsx'
 import MediaVideos from './section-media-videos'
 import MediaBackdrop from './section-media-backdrops'
+import MediaReview from './section-social-review'
 import { VIDEOS_KEY, VIDEOS_KEY_TV } from '@/lib/endpoint'
 
 export default function SectionSocial({
@@ -13,7 +14,7 @@ export default function SectionSocial({
   tvshow?: boolean
 }) {
   const [tabIndex, setTabIndex] = useState<number>(0)
-  const tabs = ['Media', 'Reviews', 'Backdrops', 'Posters']
+  const tabs = ['Media', 'Reviews', 'Backdrops' ]
   const handleSwitchTab = (index: number) => {
     setTabIndex(index)
   }
@@ -24,6 +25,7 @@ export default function SectionSocial({
 
   const section: { [key: number]: React.ReactNode } = {
     0: <MediaVideos movieId={movieId} endpoint={endpoints.videoEp} />,
+    1: <MediaReview />,
     2: <MediaBackdrop />
   }
 

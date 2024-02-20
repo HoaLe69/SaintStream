@@ -4,7 +4,6 @@ import { useRouter, useSearchParams, usePathname } from 'next/navigation'
 import { Spinner } from './loading/skeletons'
 
 export default function Trigger({ page = 1 }: { page: number }) {
-  console.log(page)
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
