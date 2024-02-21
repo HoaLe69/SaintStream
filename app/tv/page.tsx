@@ -1,6 +1,6 @@
 import Separate from '@/components/separate'
 import { Suspense } from 'react'
-import SectionFilm from '@/components/seciton-film'
+import SectionFilm from '@/components/section-film'
 import HerosSection from '@/components/heros-section'
 import {
   BannerSkeleton,

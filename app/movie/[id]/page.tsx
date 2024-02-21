@@ -7,6 +7,7 @@ import FilmCarousels from '@/components/film-carousels'
 import SectionSocial from '@/components/social-media/section-social-media'
 import { BannerSkeleton } from '@/components/loading/skeletons'
 import { Suspense } from 'react'
+import SectionFilm from '@/components/section-film'
 
 export default async function Page({ params }: { params: { id: string } }) {
   const similarMovies = await fetchMovies(SIMILAR_MOVIES(params?.id))
@@ -30,6 +31,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       <Suspense fallback={<p>Loading...</p>}>
         <FilmCarousels title="Recommendation" films={recommendations} />
       </Suspense>
+      <SectionFilm type="similar_movie" title="Helo" />
     </div>
   )
 }

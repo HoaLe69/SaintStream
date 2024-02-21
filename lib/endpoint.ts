@@ -47,7 +47,7 @@ export const FEEDBACK_MV = (id: string): string =>
 export const FEEDBACK_TV = (id: string): string =>
   `/tv/${id}/reviews?language=en-US&page=1`
 
-export const enpoints: Record<string, string> = {
+export const endpoints: Record<string, string | ((id: string) => string)> = {
   trending_mv: TRENDING,
   now_playing_mv: NOW_PLAYING,
   popular_mv: POPULAR,
@@ -57,5 +57,8 @@ export const enpoints: Record<string, string> = {
   airing_today_tv: AIRING_TODAY,
   on_the_air_tv: ON_THE_AIR,
   popular_tv: POPULAR_TV,
-  top_rated_tv: TOP_RATE_TV
+  top_rated_tv: TOP_RATE_TV,
+  similar_movie: SIMILAR_MOVIES,
+  recomendation_movies: RECOMMENDATIONS,
+  recomendation_tv: RECOMENDATION_TV
 }
