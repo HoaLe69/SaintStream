@@ -47,18 +47,35 @@ export const FEEDBACK_MV = (id: string): string =>
 export const FEEDBACK_TV = (id: string): string =>
   `/tv/${id}/reviews?language=en-US&page=1`
 
-export const endpoints: Record<string, string | ((id: string) => string)> = {
-  trending_mv: TRENDING,
-  now_playing_mv: NOW_PLAYING,
-  popular_mv: POPULAR,
-  top_rated_mv: TOP_RATE,
-  up_coming_mv: UP_COMING,
-  trending_tv: TRENDING_TV,
-  airing_today_tv: AIRING_TODAY,
-  on_the_air_tv: ON_THE_AIR,
-  popular_tv: POPULAR_TV,
-  top_rated_tv: TOP_RATE_TV,
-  similar_movie: SIMILAR_MOVIES,
-  recomendation_movies: RECOMMENDATIONS,
-  recomendation_tv: RECOMENDATION_TV
+type Endpoints = {
+  trending_mv: string
+  now_playing_mv: string
+  popular_mv: string
+  top_rated_mv: string
+  up_coming_mv: string
+  trending_tv: string
+  airing_today_tv: string
+  on_the_air_tv: string
+  popular_tv: string
+  top_rated_tv: string
+  similar_movie: (id: string) => string
+  recomendation_movies: (id: string) => string
+  recomendation_tv: (id: string) => string
 }
+
+export const endpoints: { [key in string]: string | ((id: string) => string) } =
+  {
+    trending_mv: TRENDING,
+    now_playing_mv: NOW_PLAYING,
+    popular_mv: POPULAR,
+    top_rated_mv: TOP_RATE,
+    up_coming_mv: UP_COMING,
+    trending_tv: TRENDING_TV,
+    airing_today_tv: AIRING_TODAY,
+    on_the_air_tv: ON_THE_AIR,
+    popular_tv: POPULAR_TV,
+    top_rated_tv: TOP_RATE_TV,
+    similar_movie: SIMILAR_MOVIES,
+    recomendation_movies: RECOMMENDATIONS,
+    recomendation_tv: RECOMENDATION_TV
+  }

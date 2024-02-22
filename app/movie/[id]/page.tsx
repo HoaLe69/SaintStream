@@ -1,17 +1,15 @@
 import Banner from '@/components/banner'
 import TopCast from '@/components/top-cast'
 import Separate from '@/components/separate'
-import { fetchMovies } from '@/lib/data'
-import { SIMILAR_MOVIES, RECOMMENDATIONS } from '@/lib/endpoint'
-import FilmCarousels from '@/components/film-carousels'
 import SectionSocial from '@/components/social-media/section-social-media'
-import { BannerSkeleton } from '@/components/loading/skeletons'
+import {
+  BannerSkeleton,
+  SectionFilmSkeletons
+} from '@/components/loading/skeletons'
 import { Suspense } from 'react'
 import SectionFilm from '@/components/section-film'
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const similarMovies = await fetchMovies(SIMILAR_MOVIES(params?.id))
-  const recommendations = await fetchMovies(RECOMMENDATIONS(params?.id))
   return (
     <div>
       <Suspense fallback={<BannerSkeleton />}>
@@ -24,14 +22,23 @@ export default async function Page({ params }: { params: { id: string } }) {
         <SectionSocial movieId={params?.id} />
       </Suspense>
       <Separate distance="40" />
-      <Suspense fallback={<p>Loading...</p>}>
-        <FilmCarousels title="Similar movies for you" films={similarMovies} />
+      <Suspense
+        fallback={<SectionFilmSkeletons title="Smilar movies for you" />}
+      >
+        <SectionFilm
+          title="Similar movies for you"
+          id={params?.id}
+          type="similar_movie"
+        />
       </Suspense>
       <Separate distance="40" />
-      <Suspense fallback={<p>Loading...</p>}>
-        <FilmCarousels title="Recommendation" films={recommendations} />
+      <Suspense fallback={<SectionFilmSkeletons title="Recommendation" />}>
+        <SectionFilm
+          title="Recommendation"
+          id={params?.id}
+          type="recomendation_movies"
+        />
       </Suspense>
-      <SectionFilm type="similar_movie" title="Helo" />
     </div>
   )
 }
