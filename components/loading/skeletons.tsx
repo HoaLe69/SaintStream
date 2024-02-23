@@ -44,6 +44,35 @@ export function CardSkeletons() {
   )
 }
 
+function TopCastSkeleton() {
+  return (
+    <div className="flex items-center gap-4">
+      <div
+        className={`relative ${shimmer} w-[48px] h-[48px] rounded-full overflow-hidden`}
+      ></div>
+      <div className="flex flex-col gap-2">
+        <div
+          className={`relative ${shimmer} w-[100px] h-[20px] before:rounded-md`}
+        ></div>
+        <div
+          className={`relative ${shimmer} w-[50px] h-[15px] before:rounde-md`}
+        ></div>
+      </div>
+    </div>
+  )
+}
+export function TopCastSkeletons() {
+  return (
+    <div className="flex items-center gap-10">
+      <TopCastSkeleton />
+      <TopCastSkeleton />
+      <TopCastSkeleton />
+      <TopCastSkeleton />
+      <TopCastSkeleton />
+    </div>
+  )
+}
+
 export function Spinner() {
   return (
     <div role="status">

@@ -1,16 +1,13 @@
-import { fetchDetail, fetchMovies } from '@/lib/data'
 import Separate from '@/components/separate'
 import TopCast from '@/components/top-cast'
 import SectionSocial from '@/components/social-media/section-social-media'
 import BannerTV from '@/components/banner-tv'
-import { DETAIL_TV, RECOMENDATION_TV } from '@/lib/endpoint'
 import Seasons from '@/components/seasons'
-import FilmCarousels from '@/components/film-carousels'
-import { TVSHOW } from '@/lib/definitions'
+import SectionFilm from '@/components/section-film'
+import { Suspense } from 'react'
+import { SectionFilmSkeletons } from '@/components/loading/skeletons'
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const seasons: TVSHOW = await fetchDetail(DETAIL_TV(params?.id))
-  const recommen = await fetchMovies(RECOMENDATION_TV(params?.id))
   return (
     <div>
       <BannerTV movieId={params?.id} />
@@ -19,9 +16,18 @@ export default async function Page({ params }: { params: { id: string } }) {
       <Separate distance="40" />
       <SectionSocial movieId={params?.id} tvshow />
       <Separate distance="40" />
-      <Seasons seasons={seasons.seasons} name={seasons.original_name} />
+      <Suspense fallback={<p>Loading...</p>}>
+        <Seasons id={params?.id} />
+      </Suspense>
       <Separate distance="40" />
-      <FilmCarousels prefix="tv" title="Recommendations" films={recommen} />
+      <Suspense fallback={<SectionFilmSkeletons title="Recommendations" />}>
+        <SectionFilm
+          prefix="tx"
+          title="Recommendations"
+          type="recomendation_tv"
+          id={params?.id}
+        />
+      </Suspense>
     </div>
   )
 }

@@ -1,4 +1,3 @@
-'use client'
 import Image from 'next/image'
 import { Season } from '@/lib/definitions'
 import 'swiper/css'
@@ -6,24 +5,26 @@ import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import { StarIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
+import { fetchDetail } from '@/lib/data'
+import { DETAIL_TV } from '@/lib/endpoint'
 
 type Props = {
-  seasons: Season[]
-  name: string
+  id: string
 }
-export default function Seasons({ seasons, name }: Props) {
+export default async function Seasons({ id }: Props) {
+  const seasons = await fetchDetail(DETAIL_TV(id))
   return (
     <div className="container mx-auto pr-2 relative">
       <h2 className="text-2xl mb-6 font-bold">Latest Season</h2>
-      {seasons &&
-        seasons.map((season: Season, index: number) => {
+      {seasons?.seasons &&
+        seasons.seasons.map((season: Season, index: number) => {
           const overview =
             season.name +
             ' of ' +
-            name +
+            seasons?.original_name +
             'is set to premiere on ' +
             season.air_date
-          if (index !== seasons.length - 1) return
+          if (index !== seasons.seasons.length - 1) return
           return (
             <div
               key={season.id}
@@ -39,7 +40,7 @@ export default function Seasons({ seasons, name }: Props) {
                 />
               </div>
               <div className="ml-4 ">
-                <p className="font-bold text-xl ">{season.name}</p>
+                <p className="font-bold text-xl">{season.name}</p>
                 <span>
                   <span className="rounded-xl flex items-center shadow-red-300 gap-2 mb-2">
                     <StarIcon className="w-6 h-6 text-yellow-500" />

@@ -7,6 +7,7 @@ import { fetchCasts } from '@/lib/data'
 import { CAST_TV, CAST_MOVIE } from '@/lib/endpoint'
 import { useParams, usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { TopCastSkeletons } from '@/components/loading/skeletons'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
@@ -30,7 +31,6 @@ export default function TopCast({ title }: Props) {
     getCasts()
   }, [id, pathname])
   const fallbackAvt = '/images/no-avatar.png'
-  // if (!casts.length) return <p>loading...</p>
   return (
     <div className="container mx-auto px-2">
       <p className="text-xl font-bold mb-2">{title}</p>
@@ -41,7 +41,7 @@ export default function TopCast({ title }: Props) {
         slidesPerGroupAuto
         spaceBetween={30}
       >
-        {casts &&
+        {casts.length ? (
           casts.map(cast => (
             <SwiperSlide key={cast?.id} className="!w-max !mr-4">
               <div className="flex items-center gap-4">
@@ -66,7 +66,10 @@ export default function TopCast({ title }: Props) {
                 </div>
               </div>
             </SwiperSlide>
-          ))}
+          ))
+        ) : (
+          <TopCastSkeletons />
+        )}
       </Swiper>
     </div>
   )

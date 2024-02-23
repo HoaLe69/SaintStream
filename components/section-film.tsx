@@ -14,7 +14,7 @@ export default async function SectionFilm({
   title,
   prefix = 'movie'
 }: Props) {
-  await new Promise(resolve => setTimeout(resolve, 5000))
+  // await new Promise(resolve => setTimeout(resolve, 5000))
   let address
   if (typeof endpoints[type] === 'function') {
     //@ts-ignore
