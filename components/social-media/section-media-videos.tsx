@@ -7,27 +7,28 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
-import { usePathname } from 'next/navigation'
+import { useParams, usePathname } from 'next/navigation'
 import VideoPlayer from './videos'
+import { MediaVideoSkeletons } from '@/components/loading/skeletons'
 
 // async function getVideoKeys(movieId: string) {
 //   const videos = await fetchMovies(VIDEOS_KEY(movieId))
 //   return videos
 // }
 type Props = {
-  movieId: string
   endpoint: (id: string) => string
 }
-export default function MediaVideos({ movieId, endpoint }: Props) {
+export default function MediaVideos({ endpoint }: Props) {
   const pathname = usePathname()
-  const [videos, setVideos] = useState<Video[]>([])
+  const { id } = useParams()
+  const [videos, setVideos] = useState<Video[]>()
   const [showVideo, setShowVideo] = useState({ videoKey: '', name: '' })
   // let you read the value of a resource like a promise or context
   // const videoKeys: Video[] = use(getVideoKeys(movieId))
   useEffect(() => {
     async function getVideoKeys() {
-      const res = await fetchMovies(endpoint(movieId))
-      setVideos(res)
+      const res = await fetchMovies(endpoint(id.toString()))
+      if (res) setVideos(res)
     }
     getVideoKeys()
   }, [])
@@ -35,7 +36,6 @@ export default function MediaVideos({ movieId, endpoint }: Props) {
     window.history.replaceState(null, name, `${pathname}?play=${key}`)
     setShowVideo({ videoKey: key, name: name })
   }
-  if (!videos?.length) return 'No video'
   return (
     <div>
       <Swiper
@@ -44,8 +44,8 @@ export default function MediaVideos({ movieId, endpoint }: Props) {
         spaceBetween={30}
         slidesPerView="auto"
       >
-        {videos &&
-          videos.map((video: Video) => (
+        {videos && videos!.length > 0 ? (
+          videos!.map((video: Video) => (
             <SwiperSlide key={video.id} className="!w-max">
               <div
                 className="w-[301px] h-[197px] bg-center bg-no-repeat relative"
@@ -63,7 +63,10 @@ export default function MediaVideos({ movieId, endpoint }: Props) {
                 </div>
               </div>
             </SwiperSlide>
-          ))}
+          ))
+        ) : (
+          <MediaVideoSkeletons />
+        )}
       </Swiper>
       {showVideo.videoKey && (
         <VideoPlayer {...showVideo} setShow={setShowVideo} />

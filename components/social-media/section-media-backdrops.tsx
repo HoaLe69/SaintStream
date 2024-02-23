@@ -10,6 +10,7 @@ import { fetchImage } from '@/lib/data'
 import { useParams, usePathname } from 'next/navigation'
 import Image from 'next/image'
 import { IMAGES_MV, IMAGES_TV } from '@/lib/endpoint'
+import { MediaBackdropSkeleton } from '@/components/loading/skeletons'
 
 export default function MediaBackdrop() {
   const [backdrops, setBackdrops] = useState<Backdrop[]>([])
@@ -34,7 +35,7 @@ export default function MediaBackdrop() {
         spaceBetween={30}
         slidesPerView="auto"
       >
-        {backdrops &&
+        {backdrops.length > 0 ? (
           backdrops.map((backdrop: Backdrop) => {
             return (
               <SwiperSlide key={backdrop.file_path} className="!w-max">
@@ -48,7 +49,10 @@ export default function MediaBackdrop() {
                 </div>
               </SwiperSlide>
             )
-          })}
+          })
+        ) : (
+          <MediaBackdropSkeleton />
+        )}
       </Swiper>
     </div>
   )

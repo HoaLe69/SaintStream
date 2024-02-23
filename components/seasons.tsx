@@ -11,6 +11,7 @@ import { DETAIL_TV } from '@/lib/endpoint'
 type Props = {
   id: string
 }
+
 export default async function Seasons({ id }: Props) {
   const seasons = await fetchDetail(DETAIL_TV(id))
   return (

@@ -13,8 +13,8 @@ export default function SectionSocial({
   movieId: string
   tvshow?: boolean
 }) {
-  const [tabIndex, setTabIndex] = useState<number>(0)
-  const tabs = ['Media', 'Reviews', 'Backdrops' ]
+  const [tabIndex, setTabIndex] = useState<number>(1)
+  const tabs = ['Media', 'Reviews', 'Backdrops']
   const handleSwitchTab = (index: number) => {
     setTabIndex(index)
   }
@@ -24,7 +24,7 @@ export default function SectionSocial({
   }
 
   const section: { [key: number]: React.ReactNode } = {
-    0: <MediaVideos movieId={movieId} endpoint={endpoints.videoEp} />,
+    0: <MediaVideos endpoint={endpoints.videoEp} />,
     1: <MediaReview />,
     2: <MediaBackdrop />
   }

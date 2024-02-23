@@ -1,3 +1,4 @@
+import { PlayIcon } from '@heroicons/react/24/solid'
 const shimmer =
   'before:absolute before:inset-0  before:animate-pulse before:bg-gray-700'
 export function BannerSkeleton() {
@@ -21,6 +22,36 @@ export function DiscoverSkeletons() {
   )
 }
 
+export function MediaVideoSkeletons() {
+  return (
+    <div
+      className={`w-[301px] h-[197px] ${shimmer} relative flex items-center justify-center`}
+    >
+      <PlayIcon className="w-8 h-8" />
+    </div>
+  )
+}
+
+export function MediaReviewSkeletons() {
+  return (
+    <div className=" flex items-start gap-2">
+      <div
+        className={`w-[40px] h-[40px] relative before:rounded-full ${shimmer}`}
+      />
+      <div className="flex-1">
+        <div
+          className={`w-[100px] mb-2 h-[20px] relative before:rounded-md ${shimmer}`}
+        />
+        <div
+          className={`w-full h-[80px] relative before:rounded-md ${shimmer}`}
+        />
+      </div>
+    </div>
+  )
+}
+export function MediaBackdropSkeleton() {
+  return <div className={`relative ${shimmer} w-[301px] h-[197px]`} />
+}
 export function SectionFilmSkeletons({ title }: { title: string }) {
   return (
     <div className="container px-2 mx-auto overflow-hidden">

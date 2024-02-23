@@ -22,7 +22,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       <Separate distance="40" />
       <Suspense fallback={<SectionFilmSkeletons title="Recommendations" />}>
         <SectionFilm
-          prefix="tx"
+          prefix="tv"
           title="Recommendations"
           type="recomendation_tv"
           id={params?.id}

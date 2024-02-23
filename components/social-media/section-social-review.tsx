@@ -5,10 +5,11 @@ import { useParams, usePathname } from 'next/navigation'
 import { useState, useEffect, useRef } from 'react'
 import { Reviews } from '@/lib/definitions'
 import Image from 'next/image'
-import AutoGenImage from '../auto-gen-image'
+import AutoGenImage from '@/components/auto-gen-image'
+import { MediaReviewSkeletons } from '@/components/loading/skeletons'
 
 export default function MediaReview() {
-  const [reviews, setReviews] = useState<Reviews[]>()
+  const [reviews, setReviews] = useState<Reviews[]>([])
   const pathname = usePathname()
   const { id } = useParams()
   useEffect(() => {
@@ -24,7 +25,7 @@ export default function MediaReview() {
   }, [id])
   return (
     <div className="max-h-[200px] overflow-auto">
-      {reviews &&
+      {reviews.length > 0 ? (
         reviews.map((review: Reviews) => {
           return (
             <div key={review.id} className="flex items-start gap-2">
@@ -47,7 +48,10 @@ export default function MediaReview() {
               </div>
             </div>
           )
-        })}
+        })
+      ) : (
+        <MediaReviewSkeletons />
+      )}
     </div>
   )
 }
