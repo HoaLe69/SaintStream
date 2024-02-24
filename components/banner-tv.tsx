@@ -6,9 +6,8 @@ import { DETAIL_TV } from '@/lib/endpoint'
 import { TVSHOW } from '@/lib/definitions'
 
 export default async function BannerTV({ movieId }: { movieId: string }) {
-     const banner: TVSHOW = await fetchDetail(DETAIL_TV(movieId))
-  
-  //heljasdlkasjd
+  const banner: TVSHOW = await fetchDetail(DETAIL_TV(movieId))
+  console.log(banner)
   return (
     <div className="w-screen h-[648px] flex overflow-hidden relative">
       <div

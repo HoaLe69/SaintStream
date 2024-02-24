@@ -14,6 +14,7 @@ type Props = {
 
 export default async function Seasons({ id }: Props) {
   const seasons = await fetchDetail(DETAIL_TV(id))
+  const fallback = seasons?.poster_path
   return (
     <div className="container mx-auto pr-2 relative">
       <h2 className="text-2xl mb-6 font-bold">Latest Season</h2>
@@ -33,7 +34,9 @@ export default async function Seasons({ id }: Props) {
             >
               <div className="w-[130px] shrink-0 h-[195px]">
                 <Image
-                  src={`https://image.tmdb.org/t/p/original${season?.poster_path}`}
+                  src={`https://image.tmdb.org/t/p/original${
+                    season?.poster_path || seasons?.poster_path
+                  }`}
                   width={130}
                   height={195}
                   className="h-full w-full"
