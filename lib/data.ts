@@ -1,4 +1,6 @@
 import clsx from 'clsx'
+import { collection, getDocs } from 'firebase/firestore'
+import { db } from '@/service/firebase'
 const accessToken = process.env.NEXT_PUBLIC_TMDB_ACCESS_TOKEN
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
 
@@ -8,6 +10,16 @@ const config = {
     Accept: 'application/json'
   }
 }
+export async function fetchMovieListBookMark() {
+  const movieCol = collection(db, 'movies')
+  const movieSnapshot = await getDocs(movieCol)
+  const movieList = movieSnapshot.docs.map(doc => ({
+    id: doc.id,
+    data: doc.data()
+  }))
+  return movieList
+}
+
 // fetch tredding , popular ,  etc via url param
 export async function fetchMovies(address: string) {
   try {
