@@ -1,7 +1,5 @@
 'use client'
-import { HeartIcon } from '@heroicons/react/16/solid'
-import { BookmarkIcon } from '@heroicons/react/16/solid'
-import { StarIcon } from '@heroicons/react/16/solid'
+import { HeartIcon, StarIcon } from '@heroicons/react/16/solid'
 import { Button } from './button'
 import { PlayIcon } from '@heroicons/react/24/solid'
 import { useState } from 'react'
@@ -10,6 +8,7 @@ import { fetchMovies } from '@/lib/data'
 import { Video } from '@/lib/definitions'
 import VideoPlayer from './social-media/videos'
 import { VIDEOS_KEY, VIDEOS_KEY_TV } from '@/lib/endpoint'
+import BookMarkFilm from '@/components/bookmark'
 
 export default function MovieActions({
   movieId,
@@ -45,13 +44,11 @@ export default function MovieActions({
   }
   return (
     <div className="flex items-center gap-3">
-      <span className="inline-block p-2 rounded-full bg-black">
+      <span className="inline-block p-2 rounded-full bg-black cursor-not-allowed">
         <HeartIcon className="w-6 h-6" />
       </span>
-      <span className="inline-block p-2 rounded-full bg-black">
-        <BookmarkIcon className="w-6 h-6" />
-      </span>
-      <span className="inline-block p-2 rounded-full bg-black">
+      <BookMarkFilm />
+      <span className="inline-block p-2 rounded-full bg-black cursor-not-allowed">
         <StarIcon className="w-6 h-6" />
       </span>
       <div className="ml-4">

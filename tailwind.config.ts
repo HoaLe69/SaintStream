@@ -18,13 +18,25 @@ const config: Config = {
           'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(13 ,12 , 15 , 0.95) 78.02%)'
       },
       keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0', transform: 'translateX(100%)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' }
+        },
         shimmer: {
           '0%': { opacity: '0.5' },
           '100%': { opacity: '1' }
         },
         blur: {
           '100%': { scale: '1', filter: 'blur(0)' }
+        },
+        fadeOut: {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' }
         }
+      },
+      animation: {
+        showIn: 'fadeIn 1s ease',
+        showOut: 'fadeOut 1s linear forwards'
       }
     }
   },

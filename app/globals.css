@@ -18,6 +18,72 @@ html {
     --background-end-rgb: 0, 0, 0;
   }
 }
+
+/* css toast message*/
+.toast {
+  width: 350px;
+  background-color: white;
+}
+.title {
+  font-size: 20px;
+  font-weight: 700;
+}
+/*css type toast*/
+.toast_inner {
+  padding: 0 8px;
+  border-left: 8px;
+  border-style: solid;
+}
+.toast__error .title {
+  color: #ef5350;
+}
+
+.toast__error {
+  color: #ef5350;
+  border-left-color: #ef5350;
+}
+
+.toast__infor .title {
+  color: blue;
+}
+.toast__infor {
+  color: blue;
+  border-left-color: blue;
+}
+.toast__success .title {
+  color: #9ccc65;
+}
+
+.toast__success {
+  color: #9ccc65;
+  border-left-color: #9ccc65;
+}
+
+.toast__warning {
+  color: #ffca28;
+}
+.toast__warning {
+  color: #ffca28;
+  border-left-color: #ffca28;
+}
+.toast + .toast {
+  margin-top: 20px;
+}
+@keyframes showIn {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes showOut {
+  to {
+    opacity: 0;
+  }
+}
 .container {
   max-width: 1024px;
 }
