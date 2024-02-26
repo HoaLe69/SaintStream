@@ -2,7 +2,7 @@ import { BookmarkIcon } from '@heroicons/react/24/solid'
 import Toast, { toast } from '@/components/toast'
 import { useSession } from 'next-auth/react'
 import { useParams, usePathname } from 'next/navigation'
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc, collection, deleteDoc, doc } from 'firebase/firestore'
 import { db } from '@/service/firebase'
 import { useEffect, useState } from 'react'
 import { fetchMovieListBookMark } from '@/lib/data'
@@ -10,6 +10,7 @@ import clsx from 'clsx'
 
 export default function BookMarkFilm() {
   const [added, setAdded] = useState<boolean>(false)
+  const [docId, setDocId] = useState<string>('')
   const { id } = useParams()
   const pathname = usePathname()
   const session = useSession()
@@ -22,11 +23,29 @@ export default function BookMarkFilm() {
         duration: 300
       })
     } else {
-      const type = pathname.split('/')[1]
-      await addDoc(collection(db, 'movies'), {
-        type: type,
-        id: id
-      })
+      if (added) {
+        setAdded(false)
+        await deleteDoc(doc(db, 'movies', docId))
+        toast({
+          title: 'Success',
+          message: 'This film has been removed bookmark',
+          type: 'success',
+          duration: 3000
+        })
+      } else {
+        setAdded(true)
+        const type = pathname.split('/')[1]
+        await addDoc(collection(db, 'movies'), {
+          type: type,
+          id: id
+        })
+        toast({
+          title: 'Success',
+          message: 'This film is now bookmarked',
+          type: 'success',
+          duration: 3000
+        })
+      }
     }
   }
   useEffect(() => {
@@ -34,8 +53,11 @@ export default function BookMarkFilm() {
       const res = await fetchMovieListBookMark()
       console.log(res)
       if (res) {
-        const isAdded = res.some(mv => mv.id === id)
-        if (isAdded) setAdded(true)
+        const doc = res.find(mv => mv.data.id === id)
+        if (doc?.id) {
+          setAdded(true)
+          setDocId(doc?.id)
+        }
       }
     }
     getMovieId()
