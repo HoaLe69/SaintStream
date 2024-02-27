@@ -13,58 +13,51 @@ export default function SectionSocial({
   movieId: string
   tvshow?: boolean
 }) {
-  const [tabIndex, setTabIndex] = useState<number>(1)
+  const [tabIndex, setTabIndex] = useState<string>('Reviews')
   const tabs = ['Media', 'Reviews', 'Backdrops']
-  const handleSwitchTab = (index: number) => {
-    setTabIndex(index)
+  const handleSwitchTab = (tabname: string) => {
+    setTabIndex(tabname)
   }
   let endpoints = { videoEp: VIDEOS_KEY }
   if (tvshow) {
     endpoints = { ...endpoints, videoEp: VIDEOS_KEY_TV }
   }
 
-  const section: { [key: number]: React.ReactNode } = {
-    0: <MediaVideos endpoint={endpoints.videoEp} />,
-    1: <MediaReview />,
-    2: <MediaBackdrop />
+  const section: { [key: string]: React.ReactNode } = {
+    Media: <MediaVideos endpoint={endpoints.videoEp} />,
+    Reviews: <MediaReview />,
+    Backdrops: <MediaBackdrop />
   }
-
   return (
     <div className="container mx-auto px-2">
       <div className="flex items-center gap-x-5 ">
-        {tabs.map((tab, index) => (
+        {tabs.map(tab => (
           <TabItems
             title={tab}
             key={tab}
-            index={index}
-            active={index === tabIndex}
+            active={tab === tabIndex}
             swichTab={handleSwitchTab}
           ></TabItems>
         ))}
       </div>
       <div className="mt-2">
-        <TabPannel>{section[tabIndex]}</TabPannel>
+        <span>{section[tabIndex]}</span>
       </div>
     </div>
   )
 }
-function TabPannel({ children }: { children: React.ReactNode }) {
-  return <span>{children}</span>
-}
 function TabItems({
   title,
   active,
-  index,
   swichTab
 }: {
   title: string
   active?: boolean
-  index: number
-  swichTab: (index: number) => void
+  swichTab: (tabname: string) => void
 }) {
   return (
     <span
-      onClick={() => swichTab(index)}
+      onClick={() => swichTab(title)}
       className={clsx(
         'inline-block py-1 text-[16px] text-gray-400 font-semibold cursor-pointer ',
         {

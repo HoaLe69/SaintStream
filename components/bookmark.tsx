@@ -36,6 +36,7 @@ export default function BookMarkFilm() {
         setAdded(true)
         const type = pathname.split('/')[1]
         await addDoc(collection(db, 'movies'), {
+          email: session?.data?.user?.email,
           type: type,
           id: id
         })
@@ -50,12 +51,14 @@ export default function BookMarkFilm() {
   }
   useEffect(() => {
     async function getMovieId() {
-      const res = await fetchMovieListBookMark()
-      if (res) {
-        const doc = res.find(mv => mv.data.id === id)
-        if (doc?.id) {
-          if (!added) setAdded(true)
-          setDocId(doc?.id)
+      if (session?.data?.user?.email) {
+        const res = await fetchMovieListBookMark(session?.data?.user?.email)
+        if (res) {
+          const doc = res.find(mv => mv.data.id === id)
+          if (doc?.id) {
+            if (!added) setAdded(true)
+            setDocId(doc?.id)
+          }
         }
       }
     }

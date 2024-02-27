@@ -8,6 +8,8 @@ import { useContext } from 'react'
 import { ModalContext } from './header'
 import clsx from 'clsx'
 import { XMarkIcon } from '@heroicons/react/24/solid'
+import { useSession } from 'next-auth/react'
+
 type Response = {
   id: string
   data: DocumentData
@@ -17,11 +19,14 @@ export default function BookMarkModal() {
   const [filmIds, setFilmIds] = useState<Response[]>([])
   const [listFilm, setListFilm] = useState<Movie[]>([])
   const [isOpen, setOpen] = useContext(ModalContext)
+  const session = useSession()
   useEffect(() => {
     async function fetchListFilmId() {
-      const res = await fetchMovieListBookMark()
-      if (res?.length) {
-        setFilmIds(res)
+      if (session?.data?.user?.email) {
+        const res = await fetchMovieListBookMark(session?.data?.user?.email)
+        if (res?.length) {
+          setFilmIds(res)
+        }
       }
     }
     fetchListFilmId()

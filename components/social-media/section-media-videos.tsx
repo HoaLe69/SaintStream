@@ -21,20 +21,24 @@ type Props = {
 export default function MediaVideos({ endpoint }: Props) {
   const pathname = usePathname()
   const { id } = useParams()
-  const [videos, setVideos] = useState<Video[]>()
+  const [videos, setVideos] = useState<Video[] | string>([])
   const [showVideo, setShowVideo] = useState({ videoKey: '', name: '' })
   // let you read the value of a resource like a promise or context
   // const videoKeys: Video[] = use(getVideoKeys(movieId))
   useEffect(() => {
     async function getVideoKeys() {
       const res = await fetchMovies(endpoint(id.toString()))
-      if (res) setVideos(res)
+      if (res.length) setVideos(res)
+      else setVideos('No videos')
     }
     getVideoKeys()
   }, [])
   const createUrl = (key: string, name: string) => {
     window.history.replaceState(null, name, `${pathname}?play=${key}`)
     setShowVideo({ videoKey: key, name: name })
+  }
+  if (typeof videos === 'string') {
+    return <p>{videos}</p>
   }
   return (
     <div>
@@ -45,7 +49,8 @@ export default function MediaVideos({ endpoint }: Props) {
         slidesPerView="auto"
       >
         {videos && videos!.length > 0 ? (
-          videos!.map((video: Video) => (
+          typeof videos === 'object' &&
+          videos?.map((video: Video) => (
             <SwiperSlide key={video.id} className="!w-max">
               <div
                 className="w-[301px] h-[197px] bg-center bg-no-repeat relative"

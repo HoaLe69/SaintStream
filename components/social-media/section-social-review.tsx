@@ -9,7 +9,7 @@ import AutoGenImage from '@/components/auto-gen-image'
 import { MediaReviewSkeletons } from '@/components/loading/skeletons'
 
 export default function MediaReview() {
-  const [reviews, setReviews] = useState<Reviews[]>([])
+  const [reviews, setReviews] = useState<Reviews[] | string>([])
   const pathname = usePathname()
   const { id } = useParams()
   useEffect(() => {
@@ -19,13 +19,18 @@ export default function MediaReview() {
           ? FEEDBACK_TV(id.toString())
           : FEEDBACK_MV(id.toString())
       )
-      if (res) setReviews(res)
+      if (res.length > 0) setReviews(res)
+      else setReviews('No reviews')
     }
     getReviews()
-  }, [id])
+  }, [id, pathname])
+  if (typeof reviews === 'string') {
+    return <p>{reviews}</p>
+  }
   return (
     <div className="max-h-[200px] overflow-auto">
       {reviews.length > 0 ? (
+        typeof reviews === 'object' &&
         reviews.map((review: Reviews) => {
           return (
             <div key={review.id} className="flex items-start gap-2">

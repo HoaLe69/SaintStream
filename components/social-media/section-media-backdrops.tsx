@@ -13,7 +13,7 @@ import { IMAGES_MV, IMAGES_TV } from '@/lib/endpoint'
 import { MediaBackdropSkeleton } from '@/components/loading/skeletons'
 
 export default function MediaBackdrop() {
-  const [backdrops, setBackdrops] = useState<Backdrop[]>([])
+  const [backdrops, setBackdrops] = useState<Backdrop[] | string>([])
   const { id } = useParams()
   const pathname = usePathname()
   useEffect(() => {
@@ -24,9 +24,13 @@ export default function MediaBackdrop() {
           : IMAGES_MV(id.toString())
       )
       if (res.length) setBackdrops(res)
+      else setBackdrops('No backdrops')
     }
     getBackdrop()
   }, [id])
+  if (typeof backdrops === 'string') {
+    return <p>{backdrops}</p>
+  }
   return (
     <div>
       <Swiper
@@ -36,6 +40,7 @@ export default function MediaBackdrop() {
         slidesPerView="auto"
       >
         {backdrops.length > 0 ? (
+          typeof backdrops === 'object' &&
           backdrops.map((backdrop: Backdrop) => {
             return (
               <SwiperSlide key={backdrop.file_path} className="!w-max">

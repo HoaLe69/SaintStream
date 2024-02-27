@@ -17,7 +17,7 @@ type Props = {
 }
 
 export default function TopCast({ title }: Props) {
-  const [casts, setCasts] = useState<Cast[]>([])
+  const [casts, setCasts] = useState<Cast[] | string>([])
   const pathname = usePathname()
   const { id } = useParams()
   useEffect(() => {
@@ -26,11 +26,13 @@ export default function TopCast({ title }: Props) {
       : CAST_MOVIE(id.toString())
     async function getCasts() {
       const res = await fetchCasts(endpoint)
-      if (res) setCasts(res)
+      if (res.length) setCasts(res)
+      else setCasts('No cast')
     }
     getCasts()
   }, [id, pathname])
   const fallbackAvt = '/images/no-avatar.png'
+  if (typeof casts === 'string') return
   return (
     <div className="container mx-auto px-2">
       <p className="text-xl font-bold mb-2">{title}</p>
@@ -42,6 +44,7 @@ export default function TopCast({ title }: Props) {
         spaceBetween={30}
       >
         {casts.length ? (
+          typeof casts === 'object' &&
           casts.map(cast => (
             <SwiperSlide key={cast?.id} className="!w-max !mr-4">
               <div className="flex items-center gap-4">

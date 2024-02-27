@@ -10,14 +10,15 @@ const config = {
     Accept: 'application/json'
   }
 }
-export async function fetchMovieListBookMark() {
+export async function fetchMovieListBookMark(email: string) {
   const movieCol = collection(db, 'movies')
   const movieSnapshot = await getDocs(movieCol)
   const movieList = movieSnapshot.docs.map(doc => ({
     id: doc.id,
     data: doc.data()
   }))
-  return movieList
+  const newMovieList = movieList.filter(mv => mv.data.email === email)
+  return newMovieList
 }
 //fetch movie and tv section bookmark
 export async function fetchEachFilm(id: string, type: string) {

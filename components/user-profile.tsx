@@ -31,6 +31,7 @@ export default function UserProfile() {
         height={32}
         className="rounded-full border-2"
       />
+      <p>{session?.data?.user?.name}</p>
       <span className="cursor-pointer">
         <ChevronDownIcon className="w-6 h-6" />
       </span>
