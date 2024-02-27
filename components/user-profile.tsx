@@ -8,6 +8,8 @@ import {
 } from '@heroicons/react/24/outline'
 import { signOut } from 'next-auth/react'
 import Link from 'next/link'
+import { useContext } from 'react'
+import { ModalContext } from './header'
 
 export default function UserProfile() {
   const session = useSession()
@@ -38,10 +40,14 @@ export default function UserProfile() {
 }
 
 function SubMenu() {
+  const [isOpen, setOpen] = useContext(ModalContext)
   return (
     <div className="absolute w-[200px] bg-gray-900 transition-all h-0 group-hover:h-[100px] top-full right-0 overflow-hidden mt-2">
       <ul className="py-2">
-        <li className="p-2 hover:opacity-90 hover:bg-gray-600 cursor-pointer flex gap-1 items-center">
+        <li
+          onClick={() => setOpen(true)}
+          className="p-2 hover:opacity-90 hover:bg-gray-600 cursor-pointer flex gap-1 items-center"
+        >
           <BookmarkIcon className="w-6 h-6" />
           Your Bookmark
         </li>

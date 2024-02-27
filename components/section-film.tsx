@@ -20,7 +20,6 @@ export default async function SectionFilm({
     //@ts-ignore
     address = endpoints[type](id)
   } else address = endpoints[type]
-  console.log(address)
   const films = await fetchMovies(address)
   return (
     <>

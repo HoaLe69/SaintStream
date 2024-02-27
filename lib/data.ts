@@ -19,7 +19,16 @@ export async function fetchMovieListBookMark() {
   }))
   return movieList
 }
-
+//fetch movie and tv section bookmark
+export async function fetchEachFilm(id: string, type: string) {
+  try {
+    const res = await fetch(`${baseUrl}/${type}/${id}?language=en-US`, config)
+    return await res.json()
+  } catch (e) {
+    console.error(e)
+    throw new Error('failed to fetch resource')
+  }
+}
 // fetch tredding , popular ,  etc via url param
 export async function fetchMovies(address: string) {
   try {

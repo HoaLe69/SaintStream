@@ -51,17 +51,18 @@ export default function BookMarkFilm() {
   useEffect(() => {
     async function getMovieId() {
       const res = await fetchMovieListBookMark()
-      console.log(res)
       if (res) {
         const doc = res.find(mv => mv.data.id === id)
         if (doc?.id) {
-          setAdded(true)
+          if (!added) setAdded(true)
           setDocId(doc?.id)
         }
       }
     }
-    getMovieId()
-  }, [id])
+    if (session?.data?.user) {
+      getMovieId()
+    }
+  }, [added, id, session?.data?.user])
   return (
     <>
       <Toast />
