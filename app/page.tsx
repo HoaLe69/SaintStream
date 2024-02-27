@@ -11,7 +11,7 @@ export default async function Home() {
   return (
     <main className="text-3xl">
       <Suspense fallback={<BannerSkeleton />}>
-        <HerosSection type="mv" />
+        <HerosSection type="movie" />
       </Suspense>
       <Suspense fallback={<SectionFilmSkeletons title="Trending" />}>
         <SectionFilm type="trending_mv" title="Trending" />

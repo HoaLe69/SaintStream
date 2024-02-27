@@ -8,14 +8,17 @@ import { useRef, useState } from 'react'
 import UserProfile from './user-profile'
 import BookMarkModal from './bookmark-modal'
 import { createContext } from 'react'
+import Search from './search/search'
 
 type IModalContext = [boolean, React.Dispatch<React.SetStateAction<boolean>>]
 export const ModalContext = createContext<IModalContext>([false, () => null])
 
 export default function Header() {
   const [isOpen, setOpen] = useState<boolean>(false)
+  const [isOpenSearch, setOpenSearch] = useState<boolean>(false)
   const ref = useRef<HTMLHeadElement>(null)
   const pathname = usePathname()
+
   if (typeof window !== 'undefined') {
     window.addEventListener('scroll', () => {
       const header = ref?.current
@@ -87,11 +90,15 @@ export default function Header() {
             </Link>
           </nav>
           <div className="flex items-center gap-3">
-            <MagnifyingGlassIcon className="w-6 h-6" />
+            <MagnifyingGlassIcon
+              className="w-6 h-6 cursor-pointer"
+              onClick={() => setOpenSearch(true)}
+            />
             <UserProfile />
           </div>
         </div>
       </header>
+      <Search isOpenSearch={isOpenSearch} setOpenSearch={setOpenSearch} />
       <BookMarkModal />
     </ModalContext.Provider>
   )

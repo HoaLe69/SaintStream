@@ -30,7 +30,7 @@ export default function BookMarkModal() {
       }
     }
     fetchListFilmId()
-  }, [isOpen])
+  }, [isOpen, session?.data?.user?.email])
   useEffect(() => {
     async function fetchAllFilm() {
       try {
@@ -44,7 +44,11 @@ export default function BookMarkModal() {
       }
     }
     if (filmIds.length > 0) fetchAllFilm()
-  }, [filmIds.length])
+  }, [filmIds.length, filmIds])
+  const handleCloseModal = async () => {
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    setOpen(false)
+  }
   return (
     <div
       className={clsx(
@@ -63,7 +67,7 @@ export default function BookMarkModal() {
         <div className="flex items-center gap-5 flex-wrap">
           {listFilm?.map((film, index: number) => {
             return (
-              <div key={film.id} onClick={() => setOpen(false)}>
+              <div key={film.id} onClick={handleCloseModal}>
                 <Card {...film} prefix={filmIds[index]?.data?.type} />
               </div>
             )

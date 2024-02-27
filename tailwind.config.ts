@@ -18,6 +18,11 @@ const config: Config = {
           'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(13 ,12 , 15 , 0.95) 78.02%)'
       },
       keyframes: {
+        scale: {
+          '0%': { scale: '0.9' },
+          '50%': { scale: '1.1' },
+          '100%': { scale: '1' }
+        },
         fadeIn: {
           '0%': { opacity: '0', transform: 'translateX(100%)' },
           '100%': { opacity: '1', transform: 'translateX(0)' }
@@ -36,7 +41,8 @@ const config: Config = {
       },
       animation: {
         showIn: 'fadeIn 1s ease',
-        showOut: 'fadeOut 1s linear forwards'
+        showOut: 'fadeOut 1s linear forwards',
+        scale: 'scale .8s ease-in-out'
       }
     }
   },
