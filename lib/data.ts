@@ -10,6 +10,20 @@ const config = {
     Accept: 'application/json'
   }
 }
+// get list search for keywords by their name
+export async function fetchKeywords(q: string) {
+  try {
+    const res = await fetch(
+      `${baseUrl}/search/keyword?query=${q}&page=1`,
+      config
+    )
+    const data = await res.json()
+    return data.results
+  } catch (e) {
+    console.error(e)
+  }
+}
+//get list movie id
 export async function fetchMovieListBookMark(email: string) {
   const movieCol = collection(db, 'movies')
   const movieSnapshot = await getDocs(movieCol)
