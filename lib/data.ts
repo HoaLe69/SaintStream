@@ -10,6 +10,18 @@ const config = {
     Accept: 'application/json'
   }
 }
+// get lít movie search
+export async function fetchSeachMovie(q: string | undefined, page: number = 1) {
+  try {
+    const res = await fetch(
+      `${baseUrl}/search/multi?query=${q}&include_adult=false&language=en-US&page=${page}`,
+      config
+    )
+    return res.json()
+  } catch (e) {
+    console.error(e)
+  }
+}
 // get list search for keywords by their name
 export async function fetchKeywords(q: string) {
   try {

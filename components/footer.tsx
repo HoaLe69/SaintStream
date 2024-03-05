@@ -2,6 +2,7 @@ import GithubIcon from '@/components/icon/git'
 import FbIcon from '@/components/icon/fb'
 
 export default function Footer() {
+  console.log
   return (
     <footer className="flex mt-10 items-center justify-between px-10 py-3  border-t-[1px] border-gray-500 bg-gray-900">
       <span className="text-xl font-semibold">Copyright &copy; 2023</span>

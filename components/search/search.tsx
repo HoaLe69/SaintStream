@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction } from 'react'
 import { useState, useEffect } from 'react'
 import { fetchKeywords } from '@/lib/data'
 import useDebounce from '@/hook/useDebounce'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   isOpenSearch: boolean
@@ -18,6 +19,7 @@ export default function Search({ isOpenSearch, setOpenSearch }: Props) {
   const [searchValue, setSearchValue] = useState<string>('')
   const [searchResults, setSearchResult] = useState<SearchSuggest[]>([])
   const debounceValue = useDebounce(searchValue, 500)
+  const router = useRouter()
   const handleCloseSearchModal = (e: React.MouseEvent) => {
     if (!(e.target as HTMLElement).closest('.search')) {
       setOpenSearch(false)
@@ -25,6 +27,7 @@ export default function Search({ isOpenSearch, setOpenSearch }: Props) {
       setSearchValue('')
     }
   }
+  // this effect call api input change
   useEffect(() => {
     async function getSearchResult(q: string) {
       const res = await fetchKeywords(q)
@@ -36,6 +39,12 @@ export default function Search({ isOpenSearch, setOpenSearch }: Props) {
       getSearchResult(searchValue)
     }
   }, [debounceValue, searchValue])
+  const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      router.push(`/search?q=${searchValue}`)
+      setOpenSearch(false)
+    }
+  }
   return (
     <div
       onClick={handleCloseSearchModal}
@@ -54,6 +63,7 @@ export default function Search({ isOpenSearch, setOpenSearch }: Props) {
             placeholder="Search films"
             value={searchValue}
             onChange={e => setSearchValue(e.target.value)}
+            onKeyUp={handleKeyUp}
           />
         </div>
         <div className="">
